@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account - CareerTrack</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            color: #222;
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .register-wrapper {
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+
+        .register-card {
+            width: 100%;
+            max-width: 950px;
+            margin: auto;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+
+        .register-header h1 {
+            margin: 0 0 10px;
+            font-size: 30px;
+        }
+
+
+        .register-header p {
+            margin: 0;
+            color: #777;
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           SECTION
+        ========================= */
+
+        .section {
+            margin-top: 30px;
+        }
+
+
+        .section-title {
+            font-size: 19px;
+            font-weight: bold;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eeeeee;
+        }
+
+
+        /* =========================
+           GRID
+        ========================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 25px;
+        }
+
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+
+        /* =========================
+           LABEL
+        ========================= */
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+
+        /* =========================
+           INPUTS
+        ========================= */
+
+        input,
+        select,
+        textarea {
+
+            width: 100%;
+
+            padding: 12px 14px;
+
+            border: 1px solid #d0d0d0;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            outline: none;
+
+            background: white;
+
+            transition: 0.2s;
+        }
+
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+
+            border-color: #4f46e5;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(79, 70, 229, 0.10);
+        }
+
+
+        textarea {
+
+            min-height: 100px;
+
+            resize: vertical;
+        }
+
+
+        /* =========================
+           PASSWORD
+        ========================= */
+
+        .password-wrapper {
+            position: relative;
+        }
+
+
+        .password-wrapper input {
+            padding-right: 50px;
+        }
+
+
+        .password-toggle {
+
+            position: absolute;
+
+            right: 10px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 18px;
+        }
+
+
+        /* =========================
+           SMALL PASSWORD RULES
+        ========================= */
+
+        .password-rules {
+
+            margin-top: 6px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 2px;
+
+            font-size: 11px;
+        }
+
+
+        .password-rule {
+
+            margin: 0;
+
+            color: #dc2626;
+
+            font-size: 11px;
+
+            line-height: 15px;
+        }
+
+
+        .password-rule.valid {
+
+            color: #16a34a;
+        }
+
+
+        /* =========================
+           MESSAGES
+        ========================= */
+
+        .status-message {
+
+            margin-top: 6px;
+
+            font-size: 13px;
+        }
+
+
+        .success {
+            color: green;
+        }
+
+
+        .error {
+            color: red;
+        }
+
+
+        /* =========================
+           HIDDEN
+        ========================= */
+
+        .hidden {
+            display: none !important;
+        }
+
+
+        /* =========================
+           CAREER STATUS BOX
+        ========================= */
+
+        .career-info {
+
+            background: #f8f9fc;
+
+            border-radius: 10px;
+
+            padding: 18px;
+
+            margin-top: 5px;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .submit-section {
+
+            margin-top: 35px;
+        }
+
+
+        .create-btn {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #4f46e5;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .create-btn:hover {
+            background: #4338ca;
+        }
+
+
+        /* =========================
+           LOGIN LINK
+        ========================= */
+
+        .login-link {
+
+            text-align: center;
+
+            margin-top: 18px;
+
+            font-size: 14px;
+        }
+
+
+        .login-link a {
+
+            color: #4f46e5;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .register-card {
+                padding: 25px 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="register-wrapper">
+
+    <div class="register-card">
+
+
+        <!-- =========================
+             HEADER
+        ========================= -->
+
+        <div class="register-header">
+
+            <h1>Create Your CareerTrack Account</h1>
+
+            <p>
+                Build your profile and start tracking your career journey.
+            </p>
+
+        </div>
+
+
+
+        <form id="registerForm"
+              method="POST"
+              action="{{ url_for('register') }}">
+
+
+
+            <!-- =====================================================
+                 PERSONAL INFORMATION
+            ====================================================== -->
+
+            <div class="section">
+
+                <div class="section-title">
+                    Personal Information
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <!-- NAME -->
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            value="{{ form.get('name', '') if form else '' }}"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value="{{ form.get('email', '') if form else '' }}"
+                            required>
+
+                        <span
+                            id="emailMessage"
+                            class="status-message">
+                        </span>
+
+
+                        {% if email_error %}
+
+                        <span class="status-message error">
+                            {{ email_error }}
+                        </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Phone
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            value="{{ form.get('phone', '') if form else '' }}"
+                            placeholder="Enter 10-digit phone number"
+                            maxlength="10"
+                            inputmode="numeric"
+                            pattern="[0-9]{10}"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                            required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================================================
+                 ACCOUNT SECURITY
+            ====================================================== -->
+
+            <div class="section">
+
+                <div class="section-title">
+                    Account Security
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+
+                        <div class="password-wrapper">
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                required>
+
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword('password', this)">
+
+                                👁
+
+                            </button>
+
+                        </div>
+
+
+
+                        <!-- SMALL PASSWORD REQUIREMENTS -->
+
+                        <div class="password-rules">
+
+                            <div
+                                id="lengthRule"
+                                class="password-rule">
+
+                                ✗ 8 characters minimum
+
+                            </div>
+
+
+                            <div
+                                id="upperRule"
+                                class="password-rule">
+
+                                ✗ 1 uppercase letter
+
+                            </div>
+
+
+                            <div
+                                id="lowerRule"
+                                class="password-rule">
+
+                                ✗ 1 lowercase letter
+
+                            </div>
+
+
+                            <div
+                                id="numberRule"
+                                class="password-rule">
+
+                                ✗ 1 number
+
+                            </div>
+
+
+                            <div
+                                id="specialRule"
+                                class="password-rule">
+
+                                ✗ 1 special character
+
+                            </div>
+
+                        </div>
+
+
+                        {% if password_error %}
+
+                        <span class="status-message error">
+
+                            {{ password_error }}
+
+                        </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+
+                    <!-- CONFIRM PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="confirm_password">
+
+                            Confirm Password
+
+                        </label>
+
+
+                        <div class="password-wrapper">
+
+                            <input
+                                type="password"
+                                id="confirm_password"
+                                name="confirm_password"
+                                required>
+
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword('confirm_password', this)">
+
+                                👁
+
+                            </button>
+
+                        </div>
+
+
+                        <span
+                            id="confirmMessage"
+                            class="status-message">
+
+                        </span>
+
+
+                        {% if confirm_password_error %}
+
+                        <span class="status-message error">
+
+                            {{ confirm_password_error }}
+
+                        </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================================================
+                 EDUCATION
+            ====================================================== -->
+
+            <div class="section">
+
+                <div class="section-title">
+                    Education
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <!-- COLLEGE -->
+
+                    <div class="form-group">
+
+                        <label for="college">
+                            College
+                        </label>
+
+                        <input
+                            type="text"
+                            id="college"
+                            name="college"
+                            value="{{ form.get('college', '') if form else '' }}"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- DEGREE -->
+
+                    <div class="form-group">
+
+                        <label for="degree">
+                            Degree
+                        </label>
+
+                        <input
+                            type="text"
+                            id="degree"
+                            name="degree"
+                            value="{{ form.get('degree', '') if form else '' }}"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- BRANCH -->
+
+                    <div class="form-group">
+
+                        <label for="branch">
+                            Branch
+                        </label>
+
+                        <input
+                            type="text"
+                            id="branch"
+                            name="branch"
+                            value="{{ form.get('branch', '') if form else '' }}"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- CURRENT YEAR -->
+
+                    <div
+                        class="form-group"
+                        id="currentYearGroup">
+
+                        <label for="current_year">
+
+                            Current Year
+
+                        </label>
+
+
+                        <select
+                            id="current_year"
+                            name="current_year">
+
+                            <option value="">
+                                Select Current Year
+                            </option>
+
+                            <option value="1st">
+                                1st Year
+                            </option>
+
+                            <option value="2nd">
+                                2nd Year
+                            </option>
+
+                            <option value="3rd">
+                                3rd Year
+                            </option>
+
+                            <option value="4th">
+                                4th Year
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- GRADUATION YEAR -->
+
+                    <div class="form-group">
+
+                        <label for="graduation_year">
+
+                            Graduation Year
+
+                        </label>
+
+
+                        <select
+                            id="graduation_year"
+                            name="graduation_year"
+                            required>
+
+                            <option value="">
+                                Select Graduation Year
+                            </option>
+
+                            <option value="2026">
+                                2026
+                            </option>
+
+                            <option value="2027">
+                                2027
+                            </option>
+
+                            <option value="2028">
+                                2028
+                            </option>
+
+                            <option value="2029">
+                                2029
+                            </option>
+
+                            <option value="2030">
+                                2030
+                            </option>
+
+                            <option value="2031">
+                                2031
+                            </option>
+
+                            <option value="2032">
+                                2032
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- SKILLS -->
+
+                    <div class="form-group">
+
+                        <label for="skills">
+                            Skills
+                        </label>
+
+                        <input
+                            type="text"
+                            id="skills"
+                            name="skills"
+                            placeholder="Example: Python, SQL, Java"
+                            value="{{ form.get('skills', '') if form else '' }}"
+                            required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================================================
+                 CAREER INFORMATION
+            ====================================================== -->
+
+            <div class="section">
+
+                <div class="section-title">
+                    Career Information
+                </div>
+
+
+                <div class="career-info">
+
+
+                    <div class="form-grid">
+
+
+                        <!-- CAREER STATUS -->
+
+                        <div class="form-group">
+
+                            <label for="career_status">
+
+                                Career Status
+
+                            </label>
+
+
+                            <select
+                                id="career_status"
+                                name="career_status"
+                                required>
+
+                                <option value="">
+                                    Select Career Status
+                                </option>
+
+                                <option value="Student">
+                                    Student
+                                </option>
+
+                                <option value="Job Seeker">
+                                    Job Seeker
+                                </option>
+
+                                <option value="Working">
+                                    Working
+                                </option>
+
+                                <option value="Experienced">
+                                    Experienced
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- EXPERIENCE -->
+
+                        <div
+                            id="experienceGroup"
+                            class="form-group hidden">
+
+                            <label for="experience">
+
+                                Experience
+
+                            </label>
+
+
+                            <select
+                                id="experience"
+                                name="experience">
+
+                                <option value="">
+                                    Select Experience
+                                </option>
+
+                                <option value="Less than 1 year">
+                                    Less than 1 year
+                                </option>
+
+                                <option value="1 year">
+                                    1 year
+                                </option>
+
+                                <option value="2 years">
+                                    2 years
+                                </option>
+
+                                <option value="3 years">
+                                    3 years
+                                </option>
+
+                                <option value="4 years">
+                                    4 years
+                                </option>
+
+                                <option value="5 years">
+                                    5 years
+                                </option>
+
+                                <option value="More than 5 years">
+                                    More than 5 years
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- PREFERRED ROLE -->
+
+                        <div class="form-group">
+
+                            <label for="preferred_role">
+
+                                Preferred Role
+
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="preferred_role"
+                                name="preferred_role"
+                                placeholder="Example: Software Developer"
+                                value="{{ form.get('preferred_role', '') if form else '' }}"
+                                required>
+
+                        </div>
+
+
+
+                        <!-- PREFERRED LOCATION -->
+
+                        <div class="form-group">
+
+                            <label for="preferred_location">
+
+                                Preferred Location
+
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="preferred_location"
+                                name="preferred_location"
+                                placeholder="Example: Bangalore"
+                                value="{{ form.get('preferred_location', '') if form else '' }}"
+                                required>
+
+                        </div>
+
+
+
+                        <!-- CAREER GOAL -->
+
+                        <div class="form-group full-width">
+
+                            <label for="career_goal">
+
+                                Career Goal
+
+                            </label>
+
+
+                            <textarea
+                                id="career_goal"
+                                name="career_goal"
+                                placeholder="Describe your career goal"
+                                required></textarea>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================================================
+                 SUBMIT
+            ====================================================== -->
+
+            <div class="submit-section">
+
+                <button
+                    type="submit"
+                    class="create-btn">
+
+                    Create Account
+
+                </button>
+
+            </div>
+
+
+
+            <div class="login-link">
+
+                Already have an account?
+
+                <a href="{{ url_for('login') }}">
+                    Login
+                </a>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+// ============================================================
+// PASSWORD SHOW / HIDE
+// ============================================================
+
+function togglePassword(inputId, button) {
+
+    const input =
+        document.getElementById(inputId);
+
+
+    if (input.type === "password") {
+
+        input.type = "text";
+
+        button.textContent = "🙈";
+
+    }
+
+    else {
+
+        input.type = "password";
+
+        button.textContent = "👁";
+
+    }
+
+}
+
+
+
+// ============================================================
+// PASSWORD VALIDATION
+// ============================================================
+
+const password =
+    document.getElementById("password");
+
+
+const lengthRule =
+    document.getElementById("lengthRule");
+
+
+const upperRule =
+    document.getElementById("upperRule");
+
+
+const lowerRule =
+    document.getElementById("lowerRule");
+
+
+const numberRule =
+    document.getElementById("numberRule");
+
+
+const specialRule =
+    document.getElementById("specialRule");
+
+
+let passwordValid = false;
+
+
+
+function updatePasswordRules() {
+
+    const value =
+        password.value;
+
+
+    const hasLength =
+        value.length >= 8;
+
+
+    const hasUpper =
+        /[A-Z]/.test(value);
+
+
+    const hasLower =
+        /[a-z]/.test(value);
+
+
+    const hasNumber =
+        /[0-9]/.test(value);
+
+
+    const hasSpecial =
+        /[^A-Za-z0-9]/.test(value);
+
+
+    updateRule(
+        lengthRule,
+        hasLength,
+        "8 characters minimum"
+    );
+
+
+    updateRule(
+        upperRule,
+        hasUpper,
+        "1 uppercase letter"
+    );
+
+
+    updateRule(
+        lowerRule,
+        hasLower,
+        "1 lowercase letter"
+    );
+
+
+    updateRule(
+        numberRule,
+        hasNumber,
+        "1 number"
+    );
+
+
+    updateRule(
+        specialRule,
+        hasSpecial,
+        "1 special character"
+    );
+
+
+    passwordValid =
+        hasLength &&
+        hasUpper &&
+        hasLower &&
+        hasNumber &&
+        hasSpecial;
+
+}
+
+
+
+function updateRule(
+    element,
+    valid,
+    text
+) {
+
+    if (valid) {
+
+        element.textContent =
+            "✓ " + text;
+
+        element.classList.add(
+            "valid"
+        );
+
+    }
+
+    else {
+
+        element.textContent =
+            "✗ " + text;
+
+        element.classList.remove(
+            "valid"
+        );
+
+    }
+
+}
+
+
+password.addEventListener(
+    "input",
+    updatePasswordRules
+);
+
+
+
+// ============================================================
+// CONFIRM PASSWORD
+// ============================================================
+
+const confirmPassword =
+    document.getElementById(
+        "confirm_password"
+    );
+
+
+const confirmMessage =
+    document.getElementById(
+        "confirmMessage"
+    );
+
+
+let passwordsMatch = false;
+
+
+
+function checkConfirmPassword() {
+
+    const passwordValue =
+        password.value;
+
+
+    const confirmValue =
+        confirmPassword.value;
+
+
+    if (confirmValue === "") {
+
+        confirmMessage.textContent = "";
+
+        confirmMessage.className =
+            "status-message";
+
+        passwordsMatch = false;
+
+        return;
+    }
+
+
+    if (
+        passwordValue ===
+        confirmValue
+    ) {
+
+        confirmMessage.textContent =
+            "✓ Passwords match";
+
+        confirmMessage.className =
+            "status-message success";
+
+        passwordsMatch = true;
+
+    }
+
+    else {
+
+        confirmMessage.textContent =
+            "✗ Passwords do not match";
+
+        confirmMessage.className =
+            "status-message error";
+
+        passwordsMatch = false;
+
+    }
+
+}
+
+
+confirmPassword.addEventListener(
+    "input",
+    checkConfirmPassword
+);
+
+
+password.addEventListener(
+    "input",
+    checkConfirmPassword
+);
+
+
+
+// ============================================================
+// EMAIL AVAILABILITY
+// ============================================================
+
+const email =
+    document.getElementById("email");
+
+
+const emailMessage =
+    document.getElementById(
+        "emailMessage"
+    );
+
+
+let emailExists = false;
+
+let emailTimer;
+
+
+
+email.addEventListener(
+    "input",
+    function () {
+
+        clearTimeout(emailTimer);
+
+
+        const emailValue =
+            email.value.trim();
+
+
+        emailExists = false;
+
+        emailMessage.textContent = "";
+
+
+        if (emailValue === "") {
+
+            return;
+
+        }
+
+
+        emailTimer = setTimeout(
+            async function () {
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "/check-email?email=" +
+                            encodeURIComponent(
+                                emailValue
+                            )
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (data.exists) {
+
+                        emailExists = true;
+
+
+                        emailMessage.textContent =
+                            "❌ Email already exists.";
+
+
+                        emailMessage.className =
+                            "status-message error";
+
+                    }
+
+                    else {
+
+                        emailExists = false;
+
+
+                        emailMessage.textContent =
+                            "✅ Email is available.";
+
+
+                        emailMessage.className =
+                            "status-message success";
+
+                    }
+
+                }
+
+                catch (error) {
+
+                    console.log(
+                        "Email check failed:",
+                        error
+                    );
+
+                }
+
+            },
+            400
+        );
+
+    }
+);
+
+
+
+// ============================================================
+// CAREER STATUS
+// ============================================================
+
+const careerStatus =
+    document.getElementById(
+        "career_status"
+    );
+
+
+const experienceGroup =
+    document.getElementById(
+        "experienceGroup"
+    );
+
+
+const experience =
+    document.getElementById(
+        "experience"
+    );
+
+
+const currentYearGroup =
+    document.getElementById(
+        "currentYearGroup"
+    );
+
+
+const currentYear =
+    document.getElementById(
+        "current_year"
+    );
+
+
+
+function updateCareerFields() {
+
+    const status =
+        careerStatus.value;
+
+
+    // --------------------------------------------------------
+    // STUDENT
+    // --------------------------------------------------------
+
+    if (status === "Student") {
+
+        experienceGroup.classList.add(
+            "hidden"
+        );
+
+        experience.required = false;
+
+        experience.value = "";
+
+
+        currentYearGroup.classList.remove(
+            "hidden"
+        );
+
+        currentYear.required = true;
+
+    }
+
+
+    // --------------------------------------------------------
+    // JOB SEEKER / WORKING / EXPERIENCED
+    // --------------------------------------------------------
+
+    else if (
+        status === "Job Seeker" ||
+        status === "Working" ||
+        status === "Experienced"
+    ) {
+
+        experienceGroup.classList.remove(
+            "hidden"
+        );
+
+        experience.required = true;
+
+
+        currentYearGroup.classList.add(
+            "hidden"
+        );
+
+        currentYear.required = false;
+
+        currentYear.value = "";
+
+    }
+
+
+    // --------------------------------------------------------
+    // NOTHING SELECTED
+    // --------------------------------------------------------
+
+    else {
+
+        experienceGroup.classList.add(
+            "hidden"
+        );
+
+        experience.required = false;
+
+
+        currentYearGroup.classList.add(
+            "hidden"
+        );
+
+        currentYear.required = false;
+
+    }
+
+}
+
+
+careerStatus.addEventListener(
+    "change",
+    updateCareerFields
+);
+
+
+// Run when page loads
+
+updateCareerFields();
+
+
+
+// ============================================================
+// FORM SUBMIT
+// ============================================================
+
+const registerForm =
+    document.getElementById(
+        "registerForm"
+    );
+
+
+registerForm.addEventListener(
+    "submit",
+    function(event) {
+
+
+        // PHONE VALIDATION
+
+        const phone =
+            document.getElementById(
+                "phone"
+            );
+
+
+        if (!/^[0-9]{10}$/.test(phone.value)) {
+
+            event.preventDefault();
+
+            phone.focus();
+
+            alert(
+                "Phone number must contain exactly 10 digits."
+            );
+
+            return;
+
+        }
+
+
+        // PASSWORD VALIDATION
+
+        updatePasswordRules();
+
+        checkConfirmPassword();
+
+
+        if (!passwordValid) {
+
+            event.preventDefault();
+
+            password.focus();
+
+            return;
+
+        }
+
+
+        if (!passwordsMatch) {
+
+            event.preventDefault();
+
+            confirmPassword.focus();
+
+            return;
+
+        }
+
+
+        if (emailExists) {
+
+            event.preventDefault();
+
+            email.focus();
+
+            return;
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+```
+<title>Edit Job - CareerTrack</title>
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}"
+>
+
+<style>
+
+    .edit-card {
+        max-width: 700px;
+        margin: 30px auto;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 18px;
+    }
+
+    .form-group label {
+        margin-bottom: 7px;
+        font-weight: bold;
+    }
+
+    .form-group input {
+        padding: 11px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 15px;
+    }
+
+    .form-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+    }
+
+    .update-button {
+        background: #0d6efd;
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 6px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .update-button:hover {
+        opacity: 0.9;
+    }
+
+    .cancel-button {
+        background: #6c757d;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 6px;
+        text-decoration: none;
+    }
+
+    .cancel-button:hover {
+        opacity: 0.9;
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+<!-- ======================================================
+     NAVIGATION
+======================================================= -->
+
+<nav>
+
+```
+<h2>CareerTrack</h2>
+
+<div>
+
+    <a href="/">
+        Home
+    </a>
+
+    <a href="/dashboard">
+        Dashboard
+    </a>
+
+    <a href="/jobs">
+        Jobs
+    </a>
+
+    <a href="/internships">
+        Internships
+    </a>
+
+    <a href="/assessments">
+        Assessments
+    </a>
+
+    <a href="/applications">
+        Applications
+    </a>
+
+    <a href="/interviews">
+        Interviews
+    </a>
+
+    <a href="/profile">
+        Profile
+    </a>
+
+    <a href="/logout">
+        Logout
+    </a>
+
+</div>
+```
+
+</nav>
+
+<!-- ======================================================
+     MAIN CONTENT
+======================================================= -->
+
+<div class="container">
+
+```
+<div class="card edit-card">
+
+    <h1>
+        ✏️ Edit Job
+    </h1>
+
+    <p>
+        Update the details of this job opportunity.
+    </p>
+
+
+    <!-- ==================================================
+         EDIT JOB FORM
+    =================================================== -->
+
+    <form
+        action="/edit-job/{{ job['id'] }}"
+        method="POST"
+    >
+
+
+        <!-- COMPANY -->
+
+        <div class="form-group">
+
+            <label>
+                Company *
+            </label>
+
+            <input
+                type="text"
+                name="company"
+                value="{{ job['company'] }}"
+                placeholder="Example: TCS"
+                required
+            >
+
+        </div>
+
+
+        <!-- POSITION -->
+
+        <div class="form-group">
+
+            <label>
+                Job Position *
+            </label>
+
+            <input
+                type="text"
+                name="position"
+                value="{{ job['position'] }}"
+                placeholder="Example: Software Developer"
+                required
+            >
+
+        </div>
+
+
+        <!-- LOCATION -->
+
+        <div class="form-group">
+
+            <label>
+                Location
+            </label>
+
+            <input
+                type="text"
+                name="location"
+                value="{{ job['location'] or '' }}"
+                placeholder="Example: Hyderabad"
+            >
+
+        </div>
+
+
+        <!-- SALARY -->
+
+        <div class="form-group">
+
+            <label>
+                Salary
+            </label>
+
+            <input
+                type="text"
+                name="salary"
+                value="{{ job['salary'] or '' }}"
+                placeholder="Example: ₹6 LPA"
+            >
+
+        </div>
+
+
+        <!-- JOB DATE -->
+
+        <div class="form-group">
+
+            <label>
+                Job Date
+            </label>
+
+            <input
+                type="date"
+                name="job_date"
+                value="{{ job['job_date'] or '' }}"
+            >
+
+        </div>
+
+
+        <!-- BUTTONS -->
+
+        <div class="form-buttons">
+
+            <button
+                type="submit"
+                class="update-button"
+            >
+                💾 Update Job
+            </button>
+
+
+            <a
+                href="/jobs"
+                class="cancel-button"
+            >
+                ← Cancel
+            </a>
+
+        </div>
+
+
+    </form>
+
+</div>
+```
+
+</div>
+
+</body>
+
+</html>

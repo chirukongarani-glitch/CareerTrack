@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>{% block title %}CareerTrack{% endblock %}</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}">
+```
+
+</head>
+
+<body>
+
+```
+<!-- NAVBAR -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="/" class="brand">
+            Career<span>Track</span>
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="/">Home</a>
+
+            <a href="/dashboard">Dashboard</a>
+
+            <a href="/jobs">Jobs</a>
+
+            <a href="/internships">Internships</a>
+
+            <a href="/assessments">Assessments</a>
+
+            <a href="/applications">Applications</a>
+
+            <a href="/profile">Profile</a>
+
+            <a href="/logout" class="logout-link">
+                Logout
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- MAIN CONTENT -->
+
+<main class="main-content">
+
+    {% block content %}
+
+    {% endblock %}
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <div>
+            <h3>Career<span>Track</span></h3>
+
+            <p>
+                Your personal career management platform.
+            </p>
+        </div>
+
+        <div class="footer-text">
+            © 2026 CareerTrack. All rights reserved.
+        </div>
+
+    </div>
+
+</footer>
+```
+
+</body>
+
+</html>

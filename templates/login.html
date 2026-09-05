@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login - CareerTrack</title>
+
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+
+    <style>
+
+        /* =========================================
+           LOGIN PAGE
+           ========================================= */
+
+        .login-page {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 30px 20px;
+
+            box-sizing: border-box;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eff6ff 0%,
+                    #f8fafc 50%,
+                    #eef2ff 100%
+                );
+        }
+
+
+        /* =========================================
+           LOGIN CARD
+           ========================================= */
+
+        .login-card {
+
+            width: 100%;
+
+            max-width: 430px;
+
+            background: #ffffff;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 18px;
+
+            padding: 40px;
+
+            box-sizing: border-box;
+
+            box-shadow:
+                0 20px 45px rgba(15, 23, 42, 0.10);
+
+            animation: loginCardAppear 0.45s ease;
+        }
+
+
+        @keyframes loginCardAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(12px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+            }
+        }
+
+
+        /* =========================================
+           LOGO
+           ========================================= */
+
+        .login-logo {
+
+            width: 52px;
+
+            height: 52px;
+
+            margin: 0 auto 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-size: 25px;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 8px 20px rgba(37, 99, 235, 0.25);
+        }
+
+
+        /* =========================================
+           HEADING
+           ========================================= */
+
+        .login-card h1 {
+
+            margin: 0;
+
+            text-align: center;
+
+            color: #111827;
+
+            font-size: 30px;
+
+            font-weight: 800;
+
+            letter-spacing: -0.5px;
+        }
+
+
+        .login-subtitle {
+
+            margin: 10px 0 30px;
+
+            text-align: center;
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================
+           FORM
+           ========================================= */
+
+        .login-form {
+
+            width: 100%;
+        }
+
+
+        .login-form .form-group {
+
+            margin-bottom: 20px;
+        }
+
+
+        .login-form label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #374151;
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================================
+           INPUTS
+           ========================================= */
+
+        .login-input {
+
+            width: 100%;
+
+            height: 48px;
+
+            padding: 0 14px;
+
+            box-sizing: border-box;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 9px;
+
+            background: #ffffff;
+
+            color: #111827;
+
+            font-size: 14px;
+
+            font-family: inherit;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+
+        .login-input::placeholder {
+
+            color: #9ca3af;
+        }
+
+
+        .login-input:hover {
+
+            border-color: #9ca3af;
+        }
+
+
+        .login-input:focus {
+
+            outline: none;
+
+            border-color: #2563eb;
+
+            background: #ffffff;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+
+        /* =========================================
+           PASSWORD CONTAINER
+           ========================================= */
+
+        .login-password-container {
+
+            position: relative;
+
+            width: 100%;
+        }
+
+
+        .login-password-container .login-input {
+
+            padding-right: 48px;
+        }
+
+
+        /* =========================================
+           PASSWORD EYE
+           ========================================= */
+
+        .login-password-eye {
+
+            position: absolute;
+
+            top: 50%;
+
+            right: 8px;
+
+            transform: translateY(-50%);
+
+            width: 36px;
+
+            height: 36px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background: transparent;
+
+            color: #6b7280;
+
+            font-size: 17px;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease;
+        }
+
+
+        .login-password-eye:hover {
+
+            background: #f3f4f6;
+
+            color: #2563eb;
+        }
+
+
+        /* =========================================
+           LOGIN BUTTON
+           ========================================= */
+
+        .login-button {
+
+            width: 100%;
+
+            height: 48px;
+
+            margin-top: 5px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            font-family: inherit;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .login-button:hover {
+
+            background: #1d4ed8;
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 7px 16px rgba(37, 99, 235, 0.22);
+        }
+
+
+        .login-button:active {
+
+            transform: translateY(0);
+
+            box-shadow: none;
+        }
+
+
+        /* =========================================
+           FORGOT PASSWORD
+           ========================================= */
+
+        .forgot-password {
+
+            text-align: center;
+
+            margin: 18px 0 0;
+        }
+
+
+        .forgot-password a {
+
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        .forgot-password a:hover {
+
+            text-decoration: underline;
+
+            color: #1d4ed8;
+        }
+
+
+        /* =========================================
+           DIVIDER
+           ========================================= */
+
+        .login-divider {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 26px 0;
+        }
+
+
+        .login-divider::before,
+        .login-divider::after {
+
+            content: "";
+
+            flex: 1;
+
+            height: 1px;
+
+            background: #e5e7eb;
+        }
+
+
+        .login-divider span {
+
+            color: #9ca3af;
+
+            font-size: 12px;
+
+            white-space: nowrap;
+        }
+
+
+        /* =========================================
+           CREATE ACCOUNT
+           ========================================= */
+
+        .create-account {
+
+            text-align: center;
+
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 14px;
+        }
+
+
+        .create-account a {
+
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-weight: 700;
+        }
+
+
+        .create-account a:hover {
+
+            text-decoration: underline;
+
+            color: #1d4ed8;
+        }
+
+
+        /* =========================================
+           BACK HOME
+           ========================================= */
+
+        .back-home {
+
+            display: block;
+
+            margin-top: 22px;
+
+            text-align: center;
+
+            color: #6b7280;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            transition: color 0.2s ease;
+        }
+
+
+        .back-home:hover {
+
+            color: #2563eb;
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 500px) {
+
+            .login-page {
+
+                padding: 20px 15px;
+            }
+
+
+            .login-card {
+
+                padding: 30px 24px;
+
+                border-radius: 15px;
+            }
+
+
+            .login-card h1 {
+
+                font-size: 27px;
+            }
+
+
+            .login-subtitle {
+
+                margin-bottom: 25px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="login-page">
+
+
+    <div class="login-card">
+
+
+        <!-- LOGO -->
+
+        <div class="login-logo">
+            C
+        </div>
+
+
+        <!-- HEADING -->
+
+        <h1>
+            Welcome Back
+        </h1>
+
+
+        <p class="login-subtitle">
+
+            Login to continue your CareerTrack journey.
+
+        </p>
+
+
+        <!-- LOGIN FORM -->
+
+        <form
+            method="POST"
+            class="login-form"
+        >
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label for="loginEmail">
+                    Email
+                </label>
+
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    name="email"
+                    class="login-input"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="loginPassword">
+                    Password
+                </label>
+
+
+                <div class="login-password-container">
+
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        name="password"
+                        class="login-input"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+
+                    <button
+                        type="button"
+                        class="login-password-eye"
+                        onclick="togglePassword('loginPassword', this)"
+                        aria-label="Show password"
+                    >
+
+                        👁
+
+                    </button>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="submit"
+                class="login-button"
+            >
+
+                Login
+
+            </button>
+
+
+        </form>
+
+
+        <!-- FORGOT PASSWORD -->
+
+        <p class="forgot-password">
+
+            <a href="/forgot-password">
+                Forgot Password?
+            </a>
+
+        </p>
+
+
+        <!-- DIVIDER -->
+
+        <div class="login-divider">
+
+            <span>
+                New to CareerTrack?
+            </span>
+
+        </div>
+
+
+        <!-- CREATE ACCOUNT -->
+
+        <p class="create-account">
+
+            Don't have an account?
+
+            <a href="/register">
+                Create Account
+            </a>
+
+        </p>
+
+
+        <!-- BACK HOME -->
+
+        <a
+            href="/"
+            class="back-home"
+        >
+
+            ← Back to Home
+
+        </a>
+
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+    function togglePassword(passwordId, button) {
+
+        const password =
+            document.getElementById(passwordId);
+
+
+        if (password.type === "password") {
+
+            password.type = "text";
+
+            button.textContent = "🙈";
+
+            button.setAttribute(
+                "aria-label",
+                "Hide password"
+            );
+
+        } else {
+
+            password.type = "password";
+
+            button.textContent = "👁";
+
+            button.setAttribute(
+                "aria-label",
+                "Show password"
+            );
+        }
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

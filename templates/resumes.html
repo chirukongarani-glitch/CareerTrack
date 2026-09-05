@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CareerTrack - Resume Management</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #111827;
+        }
+
+        /* ====================================================
+           NAVBAR
+        ==================================================== */
+
+        .app-nav {
+            width: 100%;
+            min-height: 72px;
+            padding: 0 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .app-nav h2 {
+            margin: 0;
+            flex-shrink: 0;
+            white-space: nowrap;
+            font-size: 25px;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        .app-nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 14px;
+            margin-left: auto;
+            flex-wrap: nowrap;
+        }
+
+        .app-nav-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 13px;
+            border-radius: 8px;
+            text-decoration: none;
+            white-space: nowrap;
+            color: #4b5563;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .app-nav-links a:hover {
+            color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .app-nav-links a.active {
+            color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .app-nav-links a.logout-link {
+            color: #dc2626;
+        }
+
+        .app-nav-links a.logout-link:hover {
+            color: #b91c1c;
+            background: #fef2f2;
+        }
+
+        /* ====================================================
+           MAIN
+        ==================================================== */
+
+        .page-container {
+            width: 90%;
+            max-width: 1180px;
+            margin: 42px auto 60px;
+        }
+
+        /* ====================================================
+           PAGE HEADER
+        ==================================================== */
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            margin: 0 0 8px;
+            font-size: 32px;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        .page-header p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .resume-summary {
+            min-width: 145px;
+            padding: 14px 18px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .resume-summary-number {
+            display: block;
+            font-size: 24px;
+            font-weight: 800;
+            color: #2563eb;
+        }
+
+        .resume-summary-label {
+            display: block;
+            margin-top: 3px;
+            color: #6b7280;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ====================================================
+           UPLOAD SECTION
+        ==================================================== */
+
+        .upload-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 30px;
+            margin-bottom: 36px;
+            box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04);
+        }
+
+        .upload-heading {
+            margin-bottom: 22px;
+        }
+
+        .upload-heading h2 {
+            margin: 0 0 7px;
+            font-size: 20px;
+            color: #111827;
+        }
+
+        .upload-heading p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* ====================================================
+           FORM
+        ==================================================== */
+
+        .upload-form {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr auto;
+            gap: 18px;
+            align-items: end;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            color: #374151;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .form-group input[type="text"] {
+            width: 100%;
+            height: 46px;
+            padding: 0 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #111827;
+            font-size: 14px;
+            outline: none;
+            transition: 0.2s ease;
+        }
+
+        .form-group input[type="text"]:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px #dbeafe;
+        }
+
+        /* ====================================================
+           FILE INPUT
+        ==================================================== */
+
+        .file-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .file-wrapper input[type="file"] {
+            width: 100%;
+            height: 46px;
+            padding: 11px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #4b5563;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .file-wrapper input[type="file"]:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px #dbeafe;
+        }
+
+        /* ====================================================
+           UPLOAD BUTTON
+        ==================================================== */
+
+        .upload-button {
+            height: 46px;
+            padding: 0 23px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: 0.2s ease;
+        }
+
+        .upload-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        /* ====================================================
+           FILE INFORMATION
+        ==================================================== */
+
+        .upload-info {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-top: 18px;
+            padding: 12px 14px;
+            border-radius: 8px;
+            background: #f8fafc;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .info-icon {
+            font-size: 15px;
+        }
+
+        /* ====================================================
+           SECTION HEADER
+        ==================================================== */
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 17px;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 21px;
+            color: #111827;
+        }
+
+        .section-header span {
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        /* ====================================================
+           RESUME LIST
+        ==================================================== */
+
+        .resume-list {
+            display: grid;
+            gap: 13px;
+        }
+
+        .resume-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+            padding: 20px 22px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            transition: 0.2s ease;
+        }
+
+        .resume-card:hover {
+            border-color: #d1d5db;
+            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+        }
+
+        /* ====================================================
+           RESUME INFORMATION
+        ==================================================== */
+
+        .resume-information {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            min-width: 0;
+        }
+
+        .file-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border-radius: 10px;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 24px;
+        }
+
+        .resume-content {
+            min-width: 0;
+        }
+
+        .company-name {
+            margin: 0 0 5px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .filename {
+            margin: 0 0 7px;
+            color: #4b5563;
+            font-size: 14px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .resume-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #9ca3af;
+            font-size: 12px;
+        }
+
+        .meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* ====================================================
+           ACTIONS
+        ==================================================== */
+
+        .resume-actions {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            flex-shrink: 0;
+        }
+
+        .action-button {
+            height: 37px;
+            padding: 0 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 7px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            transition: 0.2s ease;
+        }
+
+        .download-button {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .download-button:hover {
+            background: #dbeafe;
+        }
+
+        .delete-button {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .delete-button:hover {
+            background: #fee2e2;
+        }
+
+        /* ====================================================
+           EMPTY STATE
+        ==================================================== */
+
+        .empty-state {
+            padding: 60px 25px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .empty-file-icon {
+            width: 62px;
+            height: 62px;
+            margin: 0 auto 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #eff6ff;
+            font-size: 28px;
+        }
+
+        .empty-state h3 {
+            margin: 0 0 8px;
+            font-size: 18px;
+            color: #111827;
+        }
+
+        .empty-state p {
+            max-width: 470px;
+            margin: 0 auto;
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ====================================================
+           RESPONSIVE
+        ==================================================== */
+
+        @media (max-width: 1200px) {
+
+            .app-nav {
+                padding: 0 3%;
+                gap: 20px;
+            }
+
+            .app-nav-links {
+                gap: 7px;
+            }
+
+            .app-nav-links a {
+                padding: 9px 10px;
+                font-size: 13px;
+            }
+
+        }
+
+        @media (max-width: 950px) {
+
+            .upload-form {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .upload-button {
+                width: 100%;
+            }
+
+        }
+
+        @media (max-width: 900px) {
+
+            .app-nav {
+                min-height: auto;
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .app-nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .app-nav-links a {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+
+            .page-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .upload-form {
+                grid-template-columns: 1fr;
+            }
+
+            .resume-card {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .resume-actions {
+                width: 100%;
+            }
+
+            .action-button {
+                flex: 1;
+            }
+
+            .resume-meta {
+                flex-wrap: wrap;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .app-nav {
+                padding: 14px 15px;
+            }
+
+            .app-nav-links {
+                gap: 5px;
+            }
+
+            .app-nav-links a {
+                padding: 7px 9px;
+                font-size: 12px;
+            }
+
+            .page-container {
+                width: 92%;
+                margin: 30px auto 45px;
+            }
+
+            .page-header h1 {
+                font-size: 27px;
+            }
+
+            .upload-card {
+                padding: 21px;
+            }
+
+            .resume-card {
+                padding: 17px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ====================================================
+         NAVIGATION
+    ==================================================== -->
+
+    <nav class="app-nav">
+
+        <h2>CareerTrack</h2>
+
+        <div class="app-nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/jobs">
+                Jobs
+            </a>
+
+            <a href="/internships">
+                Internships
+            </a>
+
+            <a href="/assessments">
+                Assessments
+            </a>
+
+            <a href="/applications">
+                Applications
+            </a>
+
+            <a href="/interviews">
+                Interviews
+            </a>
+
+            <a href="/resumes" class="active">
+                Resumes
+            </a>
+
+            <a href="/profile">
+                Profile
+            </a>
+
+            <a href="/logout" class="logout-link">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ====================================================
+         MAIN CONTENT
+    ==================================================== -->
+
+    <main class="page-container">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>
+                    Resume Management
+                </h1>
+
+                <p>
+                    Keep your resumes organized and ready for every job application.
+                </p>
+
+            </div>
+
+
+            <div class="resume-summary">
+
+                <span class="resume-summary-number">
+                    {{ resumes|length }}
+                </span>
+
+                <span class="resume-summary-label">
+                    Saved Resume{% if resumes|length != 1 %}s{% endif %}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             UPLOAD CARD
+        ================================================== -->
+
+        <section class="upload-card">
+
+
+            <div class="upload-heading">
+
+                <h2>
+                    Add a Company Resume
+                </h2>
+
+                <p>
+                    Upload the version of your resume you want to use for a specific company.
+                </p>
+
+            </div>
+
+
+            <form
+                class="upload-form"
+                method="POST"
+                enctype="multipart/form-data"
+            >
+
+
+                <!-- COMPANY -->
+
+                <div class="form-group">
+
+                    <label for="company">
+                        Company Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="company"
+                        name="company"
+                        placeholder="e.g. Google"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- RESUME -->
+
+                <div class="form-group">
+
+                    <label for="resume">
+                        Resume File
+                    </label>
+
+                    <div class="file-wrapper">
+
+                        <input
+                            type="file"
+                            id="resume"
+                            name="resume"
+                            accept=".pdf,.doc,.docx"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    class="upload-button"
+                >
+                    Upload Resume
+                </button>
+
+
+            </form>
+
+
+            <div class="upload-info">
+
+                <span class="info-icon">
+                    ℹ️
+                </span>
+
+                <span>
+                    Supported formats: PDF, DOC, DOCX &nbsp; • &nbsp;
+                    Maximum file size: 5 MB
+                </span>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             SAVED RESUMES
+        ================================================== -->
+
+        <section>
+
+
+            <div class="section-header">
+
+                <h2>
+                    Saved Resumes
+                </h2>
+
+                {% if resumes %}
+
+                    <span>
+                        {{ resumes|length }}
+                        saved
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+
+            {% if resumes %}
+
+
+                <div class="resume-list">
+
+
+                    {% for resume in resumes %}
+
+
+                        <div class="resume-card">
+
+
+                            <!-- FILE INFORMATION -->
+
+                            <div class="resume-information">
+
+
+                                <div class="file-icon">
+                                    📄
+                                </div>
+
+
+                                <div class="resume-content">
+
+
+                                    <p class="company-name">
+                                        {{ resume["company"] }}
+                                    </p>
+
+
+                                    <p class="filename">
+                                        {{ resume["original_filename"] }}
+                                    </p>
+
+
+                                    <div class="resume-meta">
+
+
+                                        <span class="meta-item">
+                                            📅
+                                            Uploaded
+                                            {{ resume["uploaded_date"] }}
+                                        </span>
+
+
+                                        <span class="meta-item">
+
+                                            {% if resume["original_filename"].lower().endswith(".pdf") %}
+
+                                                PDF
+
+                                            {% elif resume["original_filename"].lower().endswith(".docx") %}
+
+                                                DOCX
+
+                                            {% else %}
+
+                                                DOC
+
+                                            {% endif %}
+
+                                            File
+
+                                        </span>
+
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                            <!-- ACTIONS -->
+
+                            <div class="resume-actions">
+
+
+                                <a
+                                    href="{{ url_for('download_resume', id=resume['id']) }}"
+                                    class="action-button download-button"
+                                >
+                                    Download
+                                </a>
+
+
+                                <a
+                                    href="{{ url_for('delete_resume', id=resume['id']) }}"
+                                    class="action-button delete-button"
+                                    onclick="return confirm('Are you sure you want to delete this resume?');"
+                                >
+                                    Delete
+                                </a>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <!-- EMPTY STATE -->
+
+                <div class="empty-state">
+
+
+                    <div class="empty-file-icon">
+                        📄
+                    </div>
+
+
+                    <h3>
+                        No resumes saved yet
+                    </h3>
+
+
+                    <p>
+                        Upload your first resume above. You can keep different versions
+                        for different companies and download them whenever you need.
+                    </p>
+
+
+                </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+    </main>
+
+
+</body>
+
+</html>

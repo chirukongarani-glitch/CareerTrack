@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Job - CareerTrack</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <h2>CareerTrack</h2>
+
+    <div>
+        <a href="/">Home</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/jobs">Jobs</a>
+        <a href="/internships">Internships</a>
+        <a href="/assessments">Assessments</a>
+        <a href="/applications">Applications</a>
+        <a href="/interviews">Interviews</a>
+        <a href="/profile">Profile</a>
+        <a href="/logout">Logout</a>
+    </div>
+</nav>
+
+
+<div class="container">
+
+    <h1>Add New Job</h1>
+
+    <p>Add a job opportunity to your CareerTrack.</p>
+
+    <div class="form-card">
+
+        <form method="POST">
+
+            <label>Company</label>
+            <input
+                type="text"
+                name="company"
+                placeholder="e.g. TCS"
+                required
+            >
+
+            <label>Position</label>
+            <input
+                type="text"
+                name="position"
+                placeholder="e.g. Software Developer"
+                required
+            >
+
+            <label>Location</label>
+            <input
+                type="text"
+                name="location"
+                placeholder="e.g. Hyderabad"
+                required
+            >
+
+            <label>Salary</label>
+            <input
+                type="text"
+                name="salary"
+                placeholder="e.g. ₹6 LPA"
+            >
+
+            <label>Job Date</label>
+            <input
+                type="date"
+                name="job_date"
+                required
+            >
+
+            <div class="form-buttons">
+
+                <button type="submit">
+                    Add Job
+                </button>
+
+                <a href="/jobs">
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

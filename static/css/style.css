@@ -1,0 +1,1766 @@
+/* ==============================
+SIMPLE CAREERTRACK HOME
+============================== */
+
+.home-body {
+background: #f8fafc;
+}
+
+/* NAVBAR */
+
+.home-nav {
+height: 72px;
+background: white;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 0 8%;
+border-bottom: 1px solid #e5e7eb;
+}
+
+.home-logo {
+font-size: 26px;
+font-weight: bold;
+color: #2563eb;
+}
+
+.home-links {
+display: flex;
+align-items: center;
+gap: 30px;
+}
+
+.home-links a {
+text-decoration: none;
+color: #374151;
+font-size: 15px;
+font-weight: 500;
+}
+
+.home-links a:hover {
+color: #2563eb;
+}
+
+.home-links .active-link {
+color: #2563eb;
+}
+
+.nav-register {
+background: #2563eb;
+color: white !important;
+padding: 10px 20px;
+border-radius: 8px;
+}
+
+/* HERO */
+
+.simple-hero {
+min-height: 560px;
+padding: 70px 8%;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 80px;
+background: linear-gradient(
+135deg,
+#eff6ff,
+#ffffff
+);
+}
+
+.hero-content {
+max-width: 600px;
+}
+
+.hero-badge {
+display: inline-block;
+background: #dbeafe;
+color: #2563eb;
+padding: 8px 14px;
+border-radius: 20px;
+font-size: 13px;
+font-weight: bold;
+margin-bottom: 20px;
+}
+
+.hero-content h1 {
+font-size: 58px;
+line-height: 1.1;
+color: #111827;
+margin-bottom: 22px;
+}
+
+.hero-content h1 span {
+color: #2563eb;
+}
+
+.hero-content p {
+color: #6b7280;
+font-size: 17px;
+line-height: 1.7;
+margin-bottom: 30px;
+}
+
+.hero-buttons {
+display: flex;
+gap: 15px;
+}
+
+.primary-button {
+background: #2563eb;
+color: white;
+padding: 13px 23px;
+border-radius: 9px;
+text-decoration: none;
+font-weight: bold;
+}
+
+.primary-button:hover {
+background: #1d4ed8;
+}
+
+.secondary-button {
+background: white;
+color: #2563eb;
+padding: 13px 23px;
+border: 1px solid #2563eb;
+border-radius: 9px;
+text-decoration: none;
+font-weight: bold;
+}
+
+/* VISUAL */
+
+.career-visual {
+width: 400px;
+height: 350px;
+position: relative;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.visual-circle {
+width: 190px;
+height: 190px;
+background: white;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 70px;
+box-shadow: 0 15px 40px rgba(37, 99, 235, 0.15);
+}
+
+.floating-card {
+position: absolute;
+background: white;
+padding: 14px 20px;
+border-radius: 10px;
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+font-weight: bold;
+color: #374151;
+}
+
+.card-one {
+top: 20px;
+right: 20px;
+}
+
+.card-two {
+bottom: 25px;
+right: 0;
+}
+
+.card-three {
+bottom: 70px;
+left: 0;
+}
+
+/* FEATURES */
+
+.home-features {
+background: white;
+padding: 75px 8%;
+text-align: center;
+}
+
+.home-features h2 {
+font-size: 30px;
+margin-bottom: 10px;
+}
+
+.features-subtitle {
+color: #6b7280;
+margin-bottom: 40px;
+}
+
+.feature-container {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 22px;
+}
+
+.feature-card {
+padding: 28px 20px;
+border: 1px solid #e5e7eb;
+border-radius: 14px;
+transition: 0.3s;
+}
+
+.feature-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.feature-icon {
+font-size: 32px;
+margin-bottom: 15px;
+}
+
+.feature-card h3 {
+margin-bottom: 10px;
+}
+
+.feature-card p {
+color: #6b7280;
+font-size: 14px;
+line-height: 1.6;
+}
+
+/* FOOTER */
+
+footer {
+background: #111827;
+color: white;
+text-align: center;
+padding: 35px;
+}
+
+footer p {
+color: #9ca3af;
+margin: 8px 0 15px;
+}
+
+footer small {
+color: #6b7280;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+```
+.simple-hero {
+    flex-direction: column;
+    text-align: center;
+}
+
+.hero-buttons {
+    justify-content: center;
+}
+
+.career-visual {
+    width: 100%;
+}
+
+.feature-container {
+    grid-template-columns: 1fr 1fr;
+}
+```
+
+}
+
+@media (max-width: 600px) {
+
+```
+.home-nav {
+    padding: 0 20px;
+}
+
+.home-links {
+    gap: 12px;
+}
+
+.simple-hero {
+    padding: 60px 20px;
+}
+
+.hero-content h1 {
+    font-size: 42px;
+}
+
+.feature-container {
+    grid-template-columns: 1fr;
+}
+```
+
+}
+/* ==============================
+REGISTER PAGE
+============================== */
+
+.register-container {
+width: 100%;
+max-width: 760px;
+padding: 30px 20px;
+margin: 0 auto;
+}
+
+.register-card {
+background: white;
+padding: 40px;
+border-radius: 18px;
+box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.register-card .auth-logo {
+margin-bottom: 20px;
+}
+
+.register-card h1 {
+text-align: center;
+font-size: 28px;
+margin-bottom: 8px;
+}
+
+.register-card .auth-subtitle {
+margin-bottom: 30px;
+}
+
+/* FORM SECTION */
+
+.form-section-title {
+font-size: 15px;
+color: #2563eb;
+border-bottom: 1px solid #e5e7eb;
+padding-bottom: 8px;
+margin: 25px 0 18px;
+}
+
+/* TWO COLUMN FORM */
+
+.form-row {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 18px;
+}
+
+/* REGISTER INPUTS */
+
+.register-card .form-group {
+margin-bottom: 18px;
+}
+
+.register-card .form-group label {
+display: block;
+font-size: 14px;
+font-weight: bold;
+margin-bottom: 7px;
+}
+
+.register-card .form-group input {
+width: 100%;
+padding: 13px 14px;
+border: 1px solid #d1d5db;
+border-radius: 9px;
+font-size: 14px;
+outline: none;
+}
+
+.register-card .form-group input:focus {
+border-color: #2563eb;
+box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+
+/* REGISTER BUTTON */
+
+.register-button {
+width: 100%;
+padding: 14px;
+margin-top: 15px;
+border: none;
+border-radius: 9px;
+background: #2563eb;
+color: white;
+font-size: 15px;
+font-weight: bold;
+cursor: pointer;
+}
+
+.register-button:hover {
+background: #1d4ed8;
+}
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+
+```
+.register-container {
+    padding: 20px 12px;
+}
+
+.register-card {
+    padding: 25px 20px;
+}
+
+.form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+}
+```
+
+}
+/* =========================================
+   REAL CAREERTRACK HOME PAGE
+   ========================================= */
+
+.real-home {
+    margin: 0;
+    background: #ffffff;
+    color: #111827;
+}
+
+
+/* ================= NAVBAR ================= */
+
+.real-nav {
+    height: 72px;
+    padding: 0 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    border-bottom: 1px solid #e5e7eb;
+
+    position: relative;
+    z-index: 10;
+}
+
+.real-logo {
+    font-size: 25px;
+    font-weight: 800;
+    color: #111827;
+}
+
+.real-logo span {
+    color: #2563eb;
+}
+
+.real-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.real-nav-links a {
+    text-decoration: none;
+    color: #4b5563;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.real-nav-links a:hover {
+    color: #2563eb;
+}
+
+.real-nav-links .real-active {
+    color: #2563eb;
+}
+
+.real-register {
+    background: #2563eb;
+    color: white !important;
+    padding: 11px 21px;
+    border-radius: 8px;
+}
+
+.real-register:hover {
+    background: #1d4ed8;
+}
+
+
+/* ================= HERO ================= */
+
+.real-hero {
+    min-height: 650px;
+
+    padding: 75px 8%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 70px;
+
+    background:
+        radial-gradient(
+            circle at 80% 30%,
+            #dbeafe,
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #f8fbff,
+            #ffffff
+        );
+
+    overflow: hidden;
+}
+
+.real-hero-content {
+    max-width: 620px;
+}
+
+.real-tag {
+    display: inline-block;
+
+    background: #eff6ff;
+    color: #2563eb;
+
+    padding: 9px 15px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    margin-bottom: 22px;
+}
+
+.real-hero h1 {
+    font-size: 60px;
+    line-height: 1.08;
+
+    letter-spacing: -2px;
+
+    margin: 0 0 25px;
+
+    color: #111827;
+}
+
+.real-hero h1 span {
+    color: #2563eb;
+}
+
+.real-hero-content > p {
+    font-size: 17px;
+    line-height: 1.75;
+
+    color: #6b7280;
+
+    max-width: 570px;
+
+    margin-bottom: 30px;
+}
+
+.real-hero-buttons {
+    display: flex;
+    gap: 14px;
+}
+
+.real-primary,
+.real-secondary {
+    text-decoration: none;
+
+    padding: 14px 23px;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.real-primary {
+    background: #2563eb;
+    color: white;
+
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.20);
+}
+
+.real-primary:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.real-secondary {
+    background: white;
+    color: #2563eb;
+
+    border: 1px solid #bfdbfe;
+}
+
+.real-secondary:hover {
+    background: #eff6ff;
+}
+
+.hero-note {
+    margin-top: 25px;
+
+    font-size: 13px;
+
+    color: #6b7280;
+}
+
+
+/* ================= HERO VISUAL ================= */
+
+.real-hero-visual {
+    width: 470px;
+    height: 470px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-preview {
+    width: 360px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 25px 60px rgba(15, 23, 42, 0.14);
+
+    transform: rotate(2deg);
+}
+
+.preview-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.preview-logo {
+    font-size: 16px;
+    font-weight: 800;
+    color: #2563eb;
+}
+
+.preview-circle {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    background: #eff6ff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preview-welcome {
+    padding: 22px 0;
+}
+
+.preview-welcome small {
+    color: #9ca3af;
+}
+
+.preview-welcome h3 {
+    margin: 5px 0 0;
+
+    font-size: 18px;
+}
+
+
+/* PREVIEW CARDS */
+
+.preview-card {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 14px;
+
+    margin-bottom: 12px;
+
+    background: #f8fafc;
+
+    border-radius: 10px;
+}
+
+.preview-icon {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 9px;
+
+    background: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+}
+
+.preview-card strong {
+    display: block;
+    font-size: 13px;
+}
+
+.preview-card small {
+    color: #9ca3af;
+    font-size: 11px;
+}
+
+
+/* FLOATING CARDS */
+
+.hero-floating {
+    position: absolute;
+
+    background: white;
+
+    padding: 13px 17px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    box-shadow:
+        0 12px 30px rgba(15, 23, 42, 0.12);
+}
+
+.floating-one {
+    top: 65px;
+    right: 0;
+}
+
+.floating-two {
+    bottom: 70px;
+    left: 0;
+}
+
+
+/* ================= FEATURES ================= */
+
+.real-features {
+    padding: 90px 8%;
+
+    background: white;
+}
+
+.section-heading {
+    text-align: center;
+
+    max-width: 650px;
+
+    margin: 0 auto 50px;
+}
+
+.small-heading {
+    color: #2563eb;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 12px;
+}
+
+.section-heading h2 {
+    font-size: 34px;
+
+    margin: 0 0 13px;
+
+    color: #111827;
+}
+
+.section-heading p {
+    color: #6b7280;
+
+    line-height: 1.6;
+}
+
+
+/* FEATURE GRID */
+
+.real-feature-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
+
+    max-width: 1200px;
+
+    margin: auto;
+}
+
+.real-feature {
+    padding: 28px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 14px;
+
+    transition: 0.25s;
+}
+
+.real-feature:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 15px 35px rgba(15, 23, 42, 0.08);
+
+    border-color: #bfdbfe;
+}
+
+.real-feature-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eff6ff;
+
+    border-radius: 11px;
+
+    font-size: 23px;
+
+    margin-bottom: 20px;
+}
+
+.real-feature h3 {
+    font-size: 17px;
+
+    margin-bottom: 10px;
+}
+
+.real-feature p {
+    color: #6b7280;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    min-height: 68px;
+}
+
+.real-feature a {
+    text-decoration: none;
+
+    color: #2563eb;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+/* ================= HOW IT WORKS ================= */
+
+.how-section {
+    padding: 90px 8%;
+
+    background: #f8fafc;
+}
+
+.steps-container {
+    max-width: 950px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.career-step {
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    gap: 18px;
+
+    border: 1px solid #e5e7eb;
+}
+
+.step-number {
+    font-size: 20px;
+
+    font-weight: 800;
+
+    color: #2563eb;
+}
+
+.career-step h3 {
+    margin: 0 0 8px;
+
+    font-size: 16px;
+}
+
+.career-step p {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* ================= CTA ================= */
+
+.real-cta {
+    padding: 75px 8%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+    text-align: center;
+
+    color: white;
+}
+
+.real-cta h2 {
+    font-size: 32px;
+
+    margin-bottom: 12px;
+}
+
+.real-cta p {
+    color: #dbeafe;
+
+    margin-bottom: 25px;
+}
+
+.real-cta a {
+    display: inline-block;
+
+    background: white;
+
+    color: #2563eb;
+
+    text-decoration: none;
+
+    padding: 13px 23px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* ================= FOOTER ================= */
+
+.real-footer {
+    padding: 45px 8%;
+
+    background: #111827;
+
+    color: white;
+
+    text-align: center;
+}
+
+.footer-logo {
+    font-size: 22px;
+
+    font-weight: 800;
+}
+
+.footer-logo span {
+    color: #60a5fa;
+}
+
+.real-footer p {
+    color: #9ca3af;
+
+    font-size: 14px;
+}
+
+.footer-links {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 25px;
+
+    margin: 22px 0;
+}
+
+.footer-links a {
+    color: #d1d5db;
+
+    text-decoration: none;
+
+    font-size: 13px;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-line {
+    height: 1px;
+
+    background: #374151;
+
+    margin: 25px 0;
+}
+
+.real-footer small {
+    color: #6b7280;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1000px) {
+
+    .real-hero {
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .real-hero-content > p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .real-hero-buttons {
+        justify-content: center;
+    }
+
+    .real-hero-visual {
+        width: 100%;
+    }
+
+    .real-feature-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .steps-container {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .real-nav {
+        padding: 0 20px;
+    }
+
+    .real-nav-links {
+        gap: 12px;
+    }
+
+    .real-nav-links a {
+        font-size: 12px;
+    }
+
+    .real-register {
+        padding: 9px 13px;
+    }
+
+    .real-hero {
+        padding: 60px 20px;
+    }
+
+    .real-hero h1 {
+        font-size: 42px;
+        letter-spacing: -1px;
+    }
+
+    .real-hero-visual {
+        height: 390px;
+    }
+
+    .dashboard-preview {
+        width: 300px;
+    }
+
+    .hero-floating {
+        font-size: 10px;
+    }
+
+    .real-features,
+    .how-section {
+        padding: 65px 20px;
+    }
+
+    .section-heading h2 {
+        font-size: 27px;
+    }
+
+    .real-feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+/* ==============================
+   DELETE ACCOUNT PAGE
+   ============================== */
+
+.delete-page {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #f8fafc;
+}
+
+.delete-card {
+    width: 420px;
+
+    padding: 35px;
+
+    background: white;
+
+    border-radius: 15px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.delete-card h1 {
+    text-align: center;
+
+    color: #b91c1c;
+
+    margin-bottom: 15px;
+}
+
+.delete-warning {
+    text-align: center;
+
+    color: #6b7280;
+
+    line-height: 1.6;
+
+    margin-bottom: 25px;
+}
+
+.delete-card .form-group {
+    margin-bottom: 18px;
+}
+
+.delete-card label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-weight: 600;
+
+    color: #374151;
+}
+
+.delete-card input {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    box-sizing: border-box;
+
+    font-size: 14px;
+}
+
+.delete-card input:focus {
+    outline: none;
+
+    border-color: #dc2626;
+}
+
+.delete-account-button {
+    width: 100%;
+
+    padding: 12px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #dc2626;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.delete-account-button:hover {
+    background: #b91c1c;
+}
+
+.delete-error {
+    color: #dc2626;
+
+    text-align: center;
+
+    margin-bottom: 15px;
+}
+
+.back-home {
+    display: block;
+
+    text-align: center;
+
+    margin-top: 20px;
+
+    color: #2563eb;
+
+    text-decoration: none;
+}
+/* ==============================
+   PASSWORD SHOW / HIDE
+   ============================== */
+
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container input {
+    width: 100%;
+    padding: 12px 45px 12px 12px;
+    box-sizing: border-box;
+}
+
+.password-eye {
+    position: absolute;
+
+    right: 10px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    padding: 5px;
+}
+
+.password-eye:hover {
+    opacity: 0.7;
+}
+/* ==============================
+   FIX REAL NAVIGATION
+   ============================== */
+
+.real-nav .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.real-nav .nav-links a {
+    text-decoration: none;
+    color: #4b5563;
+    font-size: 14px;
+    font-weight: 600;
+
+    padding: 10px 16px;
+    border-radius: 8px;
+
+    transition: all 0.2s ease;
+}
+
+.real-nav .nav-links a:hover {
+    color: #2563eb;
+    background: #eff6ff;
+}
+
+
+/* REGISTER BUTTON */
+
+.real-nav .nav-links a[href="/register"] {
+    background: #2563eb;
+    color: white;
+}
+
+.real-nav .nav-links a[href="/register"]:hover {
+    background: #1d4ed8;
+    color: white;
+}
+
+
+/* DELETE ACCOUNT */
+
+.real-nav .nav-links .real-delete {
+    color: #dc2626 !important;
+}
+
+.real-nav .nav-links .real-delete:hover {
+    background: #fef2f2;
+    color: #b91c1c !important;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .real-nav {
+        padding: 0 20px;
+    }
+
+    .real-nav .nav-links {
+        gap: 4px;
+    }
+
+    .real-nav .nav-links a {
+        padding: 8px 9px;
+        font-size: 12px;
+    }
+
+}
+/* =========================================
+   NAVBAR LINK SPACING & HOVER IMPROVEMENT
+   ========================================= */
+
+.real-nav .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.real-nav .nav-links a {
+    margin: 0;
+    white-space: nowrap;
+}
+
+/* Slightly more breathing room on larger screens */
+@media (min-width: 1001px) {
+
+    .real-nav .nav-links {
+        gap: 20px;
+    }
+
+}
+
+
+/* Better spacing on medium screens */
+@media (max-width: 1000px) and (min-width: 601px) {
+
+    .real-nav .nav-links {
+        gap: 12px;
+    }
+
+}
+
+
+/* Mobile */
+@media (max-width: 600px) {
+
+    .real-nav .nav-links {
+        gap: 7px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .real-nav .nav-links a {
+        padding: 8px 10px;
+    }
+
+}
+/* =========================================
+   CAREERTRACK - PROFESSIONAL NAVBAR
+   ========================================= */
+
+.real-nav {
+    min-height: 72px;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 35px;
+}
+
+/* CareerTrack logo */
+.real-nav .real-logo {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+/* Navigation area */
+.real-nav .nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    margin-left: auto;
+    flex-wrap: nowrap;
+}
+
+/* Individual navigation links */
+.real-nav .nav-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 13px;
+
+    margin: 0;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+    white-space: nowrap;
+
+    color: #4b5563;
+    font-size: 14px;
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Hover */
+.real-nav .nav-links a:hover {
+    color: #2563eb;
+    background: #eff6ff;
+}
+
+/* Active/current page */
+.real-nav .nav-links a.active,
+.real-nav .nav-links a[aria-current="page"] {
+    color: #2563eb;
+    background: #eff6ff;
+}
+
+/* Register button */
+.real-nav .nav-links a[href="/register"] {
+    margin-left: 8px;
+
+    padding: 10px 18px;
+
+    background: #2563eb;
+    color: white;
+}
+
+.real-nav .nav-links a[href="/register"]:hover {
+    background: #1d4ed8;
+    color: white;
+}
+
+/* Delete account */
+.real-nav .nav-links .real-delete {
+    color: #dc2626 !important;
+}
+
+.real-nav .nav-links .real-delete:hover {
+    background: #fef2f2;
+    color: #b91c1c !important;
+}
+
+
+/* =========================================
+   MEDIUM SCREEN
+   ========================================= */
+
+@media (max-width: 1200px) {
+
+    .real-nav {
+        padding: 0 3%;
+        gap: 20px;
+    }
+
+    .real-nav .nav-links {
+        gap: 4px;
+    }
+
+    .real-nav .nav-links a {
+        padding: 9px 10px;
+        font-size: 13px;
+    }
+
+}
+
+
+/* =========================================
+   SMALL SCREEN
+   ========================================= */
+
+@media (max-width: 900px) {
+
+    .real-nav {
+        min-height: auto;
+        padding: 15px 20px;
+
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .real-nav .nav-links {
+        width: 100%;
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+
+        gap: 8px;
+    }
+
+    .real-nav .nav-links a {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .real-nav {
+        padding: 14px 15px;
+    }
+
+    .real-nav .nav-links {
+        gap: 5px;
+    }
+
+    .real-nav .nav-links a {
+        padding: 7px 9px;
+        font-size: 12px;
+    }
+
+}
+/* =========================================
+   PROFESSIONAL APPLICATIONS NAVBAR
+   ========================================= */
+
+.app-nav {
+    width: 100%;
+    min-height: 72px;
+
+    padding: 0 5%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+
+    box-sizing: border-box;
+
+    gap: 40px;
+}
+
+
+/* ================= LOGO ================= */
+
+.app-nav h2 {
+    margin: 0;
+
+    flex-shrink: 0;
+    white-space: nowrap;
+
+    font-size: 25px;
+    font-weight: 800;
+
+    color: #111827;
+}
+
+
+/* ================= NAV LINKS ================= */
+
+.app-nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 14px;
+
+    margin-left: auto;
+
+    flex-wrap: nowrap;
+}
+
+
+/* ================= EACH LINK ================= */
+
+.app-nav-links a {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 13px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+    white-space: nowrap;
+
+    color: #4b5563;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* ================= HOVER ================= */
+
+.app-nav-links a:hover {
+    color: #2563eb;
+
+    background: #eff6ff;
+}
+
+
+/* ================= ACTIVE PAGE ================= */
+
+.app-nav-links a.active {
+    color: #2563eb;
+
+    background: #eff6ff;
+}
+
+
+/* ================= LOGOUT ================= */
+
+.app-nav-links a.logout-link {
+    color: #dc2626;
+}
+
+.app-nav-links a.logout-link:hover {
+    color: #b91c1c;
+
+    background: #fef2f2;
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 1200px) {
+
+    .app-nav {
+        padding: 0 3%;
+
+        gap: 20px;
+    }
+
+    .app-nav-links {
+        gap: 7px;
+    }
+
+    .app-nav-links a {
+        padding: 9px 10px;
+
+        font-size: 13px;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 900px) {
+
+    .app-nav {
+        min-height: auto;
+
+        padding: 15px 20px;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .app-nav-links {
+        width: 100%;
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+
+        gap: 8px;
+    }
+
+    .app-nav-links a {
+        padding: 8px 12px;
+
+        font-size: 13px;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .app-nav {
+        padding: 14px 15px;
+    }
+
+    .app-nav-links {
+        gap: 5px;
+    }
+
+    .app-nav-links a {
+        padding: 7px 9px;
+
+        font-size: 12px;
+    }
+}

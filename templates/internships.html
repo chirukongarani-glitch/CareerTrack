@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CareerTrack - Internships</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <style>
+
+        /* =========================================
+           CAREERTRACK NAVBAR
+           ========================================= */
+
+        .app-nav {
+            width: 100%;
+            min-height: 72px;
+            padding: 0 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            box-sizing: border-box;
+        }
+
+        /* ================= LOGO ================= */
+
+        .app-nav h2 {
+            margin: 0;
+            flex-shrink: 0;
+            white-space: nowrap;
+            font-size: 25px;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        /* ================= NAV LINKS ================= */
+
+        .app-nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 14px;
+            margin-left: auto;
+            flex-wrap: nowrap;
+        }
+
+        .app-nav-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 13px;
+            margin: 0;
+            border-radius: 8px;
+            text-decoration: none;
+            white-space: nowrap;
+            color: #4b5563;
+            font-size: 14px;
+            font-weight: 600;
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        /* ================= HOVER ================= */
+
+        .app-nav-links a:hover {
+            color: #2563eb;
+            background: #eff6ff;
+            transform: translateY(-1px);
+        }
+
+        /* ================= ACTIVE ================= */
+
+        .app-nav-links a.active {
+            color: #2563eb;
+            background: #eff6ff;
+        }
+
+        /* ================= LOGOUT ================= */
+
+        .app-nav-links a.logout-link {
+            color: #dc2626;
+        }
+
+        .app-nav-links a.logout-link:hover {
+            color: #b91c1c;
+            background: #fef2f2;
+        }
+
+        /* =========================================
+           INTERNSHIP FORM CARD
+           ========================================= */
+
+        .form-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow:
+                0 4px 18px rgba(0, 0, 0, 0.06);
+        }
+
+        .form-card h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #111827;
+        }
+
+        /* =========================================
+           FORM
+           ========================================= */
+
+        .form-card form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px 20px;
+        }
+
+        .form-card label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .form-card input {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .form-card input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+        /* =========================================
+           ADD BUTTON
+           ========================================= */
+
+        .form-card button {
+            padding: 11px 18px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .form-card button:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        /* =========================================
+           SAVED INTERNSHIP CARD
+           ========================================= */
+
+        .application-card {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 22px;
+            margin-top: 18px;
+            transition: 0.2s ease;
+        }
+
+        .application-card:hover {
+            box-shadow:
+                0 4px 14px rgba(0, 0, 0, 0.07);
+            transform: translateY(-1px);
+        }
+
+        .application-card h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #111827;
+            font-size: 20px;
+        }
+
+        .application-card p {
+            margin: 8px 0;
+            color: #4b5563;
+            line-height: 1.5;
+        }
+
+        .application-card strong {
+            color: #111827;
+        }
+
+        /* =========================================
+           ACTION BUTTONS
+           ========================================= */
+
+        .internship-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 18px;
+            flex-wrap: wrap;
+        }
+
+        .edit-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 9px 15px;
+            background: #2563eb;
+            color: white;
+            border-radius: 7px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .edit-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .delete-button {
+            padding: 9px 15px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .delete-button:hover {
+            background: #bb2d3b;
+            transform: translateY(-1px);
+        }
+
+        /* =========================================
+           RESPONSIVE NAVBAR
+           ========================================= */
+
+        @media (max-width: 1200px) {
+
+            .app-nav {
+                padding: 0 3%;
+                gap: 20px;
+            }
+
+            .app-nav-links {
+                gap: 7px;
+            }
+
+            .app-nav-links a {
+                padding: 9px 10px;
+                font-size: 13px;
+            }
+        }
+
+        /* =========================================
+           TABLET / MOBILE
+           ========================================= */
+
+        @media (max-width: 900px) {
+
+            .app-nav {
+                min-height: auto;
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .app-nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .app-nav-links a {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+
+            .form-card form {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* =========================================
+           SMALL MOBILE
+           ========================================= */
+
+        @media (max-width: 600px) {
+
+            .app-nav {
+                padding: 14px 15px;
+            }
+
+            .app-nav-links {
+                gap: 5px;
+            }
+
+            .app-nav-links a {
+                padding: 7px 9px;
+                font-size: 12px;
+            }
+
+            .form-card {
+                padding: 20px;
+            }
+
+            .application-card {
+                padding: 18px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<!-- ======================================================
+     NAVIGATION
+======================================================= -->
+
+<nav class="app-nav">
+
+    <h2>
+        CareerTrack
+    </h2>
+
+    <div class="app-nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/jobs">
+            Jobs
+        </a>
+
+        <a href="/internships" class="active">
+            Internships
+        </a>
+
+        <a href="/assessments">
+            Assessments
+        </a>
+
+        <a href="/applications">
+            Applications
+        </a>
+
+        <a href="/interviews">
+            Interviews
+        </a>
+
+        <a href="/profile">
+            Profile
+        </a>
+
+        <a href="/logout" class="logout-link">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ======================================================
+     MAIN CONTENT
+======================================================= -->
+
+<div class="container">
+
+
+    <!-- PAGE TITLE -->
+
+    <h1>
+        Internships
+    </h1>
+
+    <p>
+        Track and manage your internship opportunities.
+    </p>
+
+
+    <!-- ==================================================
+         ADD INTERNSHIP
+    =================================================== -->
+
+    <div class="form-card">
+
+        <h2>
+            Add Internship
+        </h2>
+
+        <form
+            action="/internships"
+            method="POST"
+        >
+
+
+            <!-- COMPANY -->
+
+            <div>
+
+                <label>
+                    Company
+                </label>
+
+                <input
+                    type="text"
+                    name="company"
+                    placeholder="Enter company name"
+                    required
+                >
+
+            </div>
+
+
+            <!-- POSITION -->
+
+            <div>
+
+                <label>
+                    Position
+                </label>
+
+                <input
+                    type="text"
+                    name="position"
+                    placeholder="Enter internship position"
+                    required
+                >
+
+            </div>
+
+
+            <!-- LOCATION -->
+
+            <div>
+
+                <label>
+                    Location
+                </label>
+
+                <input
+                    type="text"
+                    name="location"
+                    placeholder="Enter location"
+                    required
+                >
+
+            </div>
+
+
+            <!-- STIPEND -->
+
+            <div>
+
+                <label>
+                    Stipend (₹)
+                </label>
+
+                <input
+                    type="number"
+                    name="stipend"
+                    placeholder="Example: 15000"
+                    min="0"
+                    step="1"
+                    required
+                >
+
+            </div>
+
+
+            <!-- DURATION -->
+
+            <div>
+
+                <label>
+                    Duration (Years)
+                </label>
+
+                <input
+                    type="number"
+                    name="duration"
+                    placeholder="Example: 1"
+                    min="0.1"
+                    step="0.1"
+                    required
+                >
+
+            </div>
+
+
+            <!-- INTERNSHIP DATE -->
+
+            <div>
+
+                <label>
+                    Internship Date
+                </label>
+
+                <input
+                    type="date"
+                    name="internship_date"
+                    required
+                >
+
+            </div>
+
+
+            <!-- BUTTON -->
+
+            <div
+                style="
+                    display: flex;
+                    align-items: end;
+                "
+            >
+
+                <button
+                    type="submit"
+                >
+                    ➕ Add Internship
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- ==================================================
+         SAVED INTERNSHIPS
+    =================================================== -->
+
+    <div class="form-card">
+
+        <h2>
+            Saved Internships
+        </h2>
+
+
+        {% if internships %}
+
+            {% for internship in internships %}
+
+                <div class="application-card">
+
+                    <h3>
+                        {{ internship["company"] }}
+                    </h3>
+
+
+                    <p>
+
+                        <strong>
+                            Position:
+                        </strong>
+
+                        {{ internship["position"] }}
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>
+                            Location:
+                        </strong>
+
+                        {{ internship["location"] }}
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>
+                            Stipend:
+                        </strong>
+
+                        ₹{{ internship["stipend"] }}
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>
+                            Duration:
+                        </strong>
+
+                        {{ internship["duration"] }} years
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>
+                            Date:
+                        </strong>
+
+                        {{ internship["internship_date"] }}
+
+                    </p>
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="internship-actions">
+
+
+                        <!-- EDIT -->
+
+                        <a
+                            href="{{ url_for('edit_internship', id=internship['id']) }}"
+                            class="edit-button"
+                        >
+                            ✏️ Edit
+                        </a>
+
+
+                        <!-- DELETE -->
+
+                        <form
+                            action="{{ url_for('delete_internship', id=internship['id']) }}"
+                            method="POST"
+                            style="margin: 0;"
+                        >
+
+                            <button
+                                type="submit"
+                                class="delete-button"
+                                onclick="
+                                    return confirm(
+                                        'Are you sure you want to delete this internship?'
+                                    );
+                                "
+                            >
+                                🗑️ Delete
+                            </button>
+
+                        </form>
+
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+
+        {% else %}
+
+            <div
+                style="
+                    text-align: center;
+                    padding: 30px 10px;
+                "
+            >
+
+                <h3>
+                    🔍 No Internships Yet
+                </h3>
+
+                <p>
+                    No internships have been added yet.
+                </p>
+
+                <p>
+                    Use the Add Internship form above to add
+                    your first internship opportunity.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

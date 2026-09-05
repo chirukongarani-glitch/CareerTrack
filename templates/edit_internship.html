@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Internship - CareerTrack</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <style>
+
+        /* =========================================
+           CAREERTRACK NAVBAR
+           ========================================= */
+
+        .app-nav {
+            width: 100%;
+            min-height: 72px;
+            padding: 0 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            box-sizing: border-box;
+        }
+
+        /* LOGO */
+
+        .app-nav h2 {
+            margin: 0;
+            flex-shrink: 0;
+            white-space: nowrap;
+            font-size: 25px;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        /* NAV LINKS */
+
+        .app-nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 14px;
+            margin-left: auto;
+            flex-wrap: nowrap;
+        }
+
+        .app-nav-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 13px;
+            margin: 0;
+            border-radius: 8px;
+            text-decoration: none;
+            white-space: nowrap;
+            color: #4b5563;
+            font-size: 14px;
+            font-weight: 600;
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .app-nav-links a:hover {
+            color: #2563eb;
+            background: #eff6ff;
+            transform: translateY(-1px);
+        }
+
+        .app-nav-links a.active {
+            color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .app-nav-links a.logout-link {
+            color: #dc2626;
+        }
+
+        .app-nav-links a.logout-link:hover {
+            color: #b91c1c;
+            background: #fef2f2;
+        }
+
+
+        /* =========================================
+           PAGE
+           ========================================= */
+
+        .edit-page {
+            max-width: 900px;
+            margin: 45px auto;
+            padding: 0 25px;
+        }
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            margin: 0 0 8px;
+            color: #111827;
+            font-size: 32px;
+            font-weight: 800;
+        }
+
+        .page-header p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 15px;
+        }
+
+
+        /* =========================================
+           EDIT CARD
+           ========================================= */
+
+        .edit-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.06);
+        }
+
+        .edit-card-header {
+            margin-bottom: 28px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .edit-card-header h2 {
+            margin: 0 0 6px;
+            color: #111827;
+            font-size: 21px;
+        }
+
+        .edit-card-header p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+
+        /* =========================================
+           FORM
+           ========================================= */
+
+        .edit-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px 24px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 13px;
+            box-sizing: border-box;
+
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+
+            background: #ffffff;
+            color: #111827;
+
+            font-family: inherit;
+            font-size: 14px;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+        .form-group input::placeholder {
+            color: #9ca3af;
+        }
+
+
+        /* =========================================
+           FULL WIDTH FIELD
+           ========================================= */
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+
+        /* =========================================
+           FORM ACTIONS
+           ========================================= */
+
+        .form-actions {
+            grid-column: 1 / -1;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            margin-top: 10px;
+            padding-top: 22px;
+
+            border-top: 1px solid #e5e7eb;
+        }
+
+
+        /* UPDATE BUTTON */
+
+        .update-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 11px 20px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #2563eb;
+            color: #ffffff;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            cursor: pointer;
+            text-decoration: none;
+
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .update-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+
+        /* CANCEL BUTTON */
+
+        .cancel-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 11px 20px;
+
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+
+            background: #ffffff;
+            color: #374151;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            text-decoration: none;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .cancel-button:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================================
+           RESPONSIVE NAVBAR
+           ========================================= */
+
+        @media (max-width: 1200px) {
+
+            .app-nav {
+                padding: 0 3%;
+                gap: 20px;
+            }
+
+            .app-nav-links {
+                gap: 7px;
+            }
+
+            .app-nav-links a {
+                padding: 9px 10px;
+                font-size: 13px;
+            }
+        }
+
+
+        /* =========================================
+           TABLET
+           ========================================= */
+
+        @media (max-width: 900px) {
+
+            .app-nav {
+                min-height: auto;
+                padding: 15px 20px;
+
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .app-nav-links {
+                width: 100%;
+
+                justify-content: center;
+
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .app-nav-links a {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+
+            .edit-page {
+                margin: 30px auto;
+            }
+
+            .edit-form {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .form-actions {
+                grid-column: auto;
+            }
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 600px) {
+
+            .app-nav {
+                padding: 14px 15px;
+            }
+
+            .app-nav-links {
+                gap: 5px;
+            }
+
+            .app-nav-links a {
+                padding: 7px 9px;
+                font-size: 12px;
+            }
+
+            .edit-page {
+                margin: 25px auto;
+                padding: 0 15px;
+            }
+
+            .page-header h1 {
+                font-size: 27px;
+            }
+
+            .edit-card {
+                padding: 22px 18px;
+            }
+
+            .form-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .update-button,
+            .cancel-button {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ======================================================
+     NAVIGATION
+======================================================= -->
+
+<nav class="app-nav">
+
+    <h2>
+        CareerTrack
+    </h2>
+
+    <div class="app-nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/jobs">
+            Jobs
+        </a>
+
+        <a href="/internships" class="active">
+            Internships
+        </a>
+
+        <a href="/assessments">
+            Assessments
+        </a>
+
+        <a href="/applications">
+            Applications
+        </a>
+
+        <a href="/interviews">
+            Interviews
+        </a>
+
+        <a href="/profile">
+            Profile
+        </a>
+
+        <a href="/logout" class="logout-link">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ======================================================
+     MAIN CONTENT
+======================================================= -->
+
+<main class="edit-page">
+
+
+    <!-- PAGE HEADER -->
+
+    <div class="page-header">
+
+        <h1>
+            Edit Internship
+        </h1>
+
+        <p>
+            Update the details of your internship opportunity.
+        </p>
+
+    </div>
+
+
+    <!-- ==================================================
+         EDIT CARD
+    =================================================== -->
+
+    <div class="edit-card">
+
+
+        <div class="edit-card-header">
+
+            <h2>
+                Internship Details
+            </h2>
+
+            <p>
+                Make changes to the information below and save your updates.
+            </p>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <form
+            class="edit-form"
+            action="{{ url_for('edit_internship', id=internship['id']) }}"
+            method="POST"
+        >
+
+
+            <!-- COMPANY -->
+
+            <div class="form-group">
+
+                <label for="company">
+                    Company
+                </label>
+
+                <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    value="{{ internship['company'] }}"
+                    placeholder="Enter company name"
+                    required
+                >
+
+            </div>
+
+
+            <!-- POSITION -->
+
+            <div class="form-group">
+
+                <label for="position">
+                    Position
+                </label>
+
+                <input
+                    type="text"
+                    id="position"
+                    name="position"
+                    value="{{ internship['position'] }}"
+                    placeholder="Enter internship position"
+                    required
+                >
+
+            </div>
+
+
+            <!-- LOCATION -->
+
+            <div class="form-group">
+
+                <label for="location">
+                    Location
+                </label>
+
+                <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    value="{{ internship['location'] }}"
+                    placeholder="Enter internship location"
+                    required
+                >
+
+            </div>
+
+
+            <!-- STIPEND -->
+
+            <div class="form-group">
+
+                <label for="stipend">
+                    Stipend (₹)
+                </label>
+
+                <input
+                    type="number"
+                    id="stipend"
+                    name="stipend"
+                    value="{{ internship['stipend'] }}"
+                    placeholder="Example: 15000"
+                    min="0"
+                    step="1"
+                    required
+                >
+
+            </div>
+
+
+            <!-- DURATION -->
+
+            <div class="form-group">
+
+                <label for="duration">
+                    Duration (Years)
+                </label>
+
+                <input
+                    type="number"
+                    id="duration"
+                    name="duration"
+                    value="{{ internship['duration'] }}"
+                    placeholder="Example: 1"
+                    min="0.1"
+                    step="0.1"
+                    required
+                >
+
+            </div>
+
+
+            <!-- INTERNSHIP DATE -->
+
+            <div class="form-group">
+
+                <label for="internship_date">
+                    Internship Date
+                </label>
+
+                <input
+                    type="date"
+                    id="internship_date"
+                    name="internship_date"
+                    value="{{ internship['internship_date'] }}"
+                    required
+                >
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="form-actions">
+
+                <button
+                    type="submit"
+                    class="update-button"
+                >
+                    ✓ Update Internship
+                </button>
+
+
+                <a
+                    href="{{ url_for('internships') }}"
+                    class="cancel-button"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</main>
+
+
+</body>
+
+</html>

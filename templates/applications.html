@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+```
+<title>My Applications - CareerTrack</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}">
+
+<style>
+
+    /* ================= APPLICATIONS PAGE ================= */
+
+    .applications {
+        max-width: 1200px;
+        margin: 45px auto;
+        padding: 0 25px;
+    }
+
+
+    /* ================= PAGE HEADER ================= */
+
+    .applications h1 {
+        margin-bottom: 8px;
+        font-size: 32px;
+    }
+
+    .applications > p {
+        color: #666;
+        margin-bottom: 25px;
+        font-size: 15px;
+    }
+
+
+    /* ================= ADD BUTTON ================= */
+
+    .add-button {
+        display: inline-block;
+        padding: 11px 18px;
+        margin-bottom: 28px;
+
+        background: #2563eb;
+        color: white;
+
+        text-decoration: none;
+        border-radius: 8px;
+
+        font-weight: 600;
+        font-size: 14px;
+
+        transition: 0.2s ease;
+    }
+
+    .add-button:hover {
+        background: #1d4ed8;
+        transform: translateY(-1px);
+    }
+
+
+    /* ================= TABLE CARD ================= */
+
+    .application-table {
+        background: white;
+
+        border-radius: 14px;
+
+        box-shadow:
+            0 4px 18px rgba(0, 0, 0, 0.08);
+
+        overflow-x: auto;
+
+        border: 1px solid #eeeeee;
+    }
+
+
+    /* ================= TABLE ================= */
+
+    .application-table table {
+        width: 100%;
+        min-width: 850px;
+
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+
+    /* ================= TABLE HEADER ================= */
+
+    .application-table th {
+        padding: 18px 24px;
+
+        background: #f8fafc;
+
+        color: #475569;
+
+        font-size: 13px;
+        font-weight: 700;
+
+        text-align: left;
+
+        border-bottom: 1px solid #e5e7eb;
+
+        white-space: nowrap;
+    }
+
+
+    /* ================= TABLE CELLS ================= */
+
+    .application-table td {
+        padding: 22px 24px;
+
+        border-bottom: 1px solid #eef0f3;
+
+        vertical-align: middle;
+
+        color: #374151;
+
+        font-size: 14px;
+    }
+
+
+    .application-table tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+
+    /* ================= ROW HOVER ================= */
+
+    .application-table tbody tr {
+        transition: 0.2s ease;
+    }
+
+    .application-table tbody tr:hover {
+        background: #f8fafc;
+    }
+
+
+    /* ================= COMPANY ================= */
+
+    .application-table td strong {
+        font-size: 16px;
+
+        color: #111827;
+
+        letter-spacing: 0.2px;
+    }
+
+
+    /* ================= POSITION ================= */
+
+    .application-table td:nth-child(2) {
+        color: #4b5563;
+
+        font-weight: 500;
+    }
+
+
+    /* ================= STATUS ================= */
+
+    .status {
+        display: inline-flex;
+
+        align-items: center;
+
+        padding: 7px 12px;
+
+        border-radius: 20px;
+
+        font-size: 13px;
+
+        font-weight: 600;
+
+        white-space: nowrap;
+    }
+
+
+    /* Applied */
+
+    .status.applied {
+        background: #eff6ff;
+        color: #2563eb;
+    }
+
+
+    /* Assessment */
+
+    .status.assessment {
+        background: #fff7ed;
+        color: #ea580c;
+    }
+
+
+    /* Interview */
+
+    .status.interview {
+        background: #f5f3ff;
+        color: #7c3aed;
+    }
+
+
+    /* Selected */
+
+    .status.selected {
+        background: #ecfdf5;
+        color: #059669;
+    }
+
+
+    /* Rejected */
+
+    .status.rejected {
+        background: #fef2f2;
+        color: #dc2626;
+    }
+
+
+    /* Withdrawn */
+
+    .status.withdrawn {
+        background: #f3f4f6;
+        color: #6b7280;
+    }
+
+
+    /* ================= DATE ================= */
+
+    .application-table td:nth-child(4) {
+        white-space: nowrap;
+
+        color: #4b5563;
+    }
+
+
+    /* ================= ACTIONS ================= */
+
+    .application-table td:last-child {
+        white-space: nowrap;
+    }
+
+
+    /* ================= VIEW ================= */
+
+    .view-button {
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        padding: 8px 12px;
+
+        margin-right: 8px;
+
+        background: #eff6ff;
+        color: #2563eb;
+
+        border-radius: 7px;
+
+        text-decoration: none;
+
+        font-size: 13px;
+        font-weight: 600;
+
+        transition: 0.2s ease;
+    }
+
+    .view-button:hover {
+        background: #dbeafe;
+
+        transform: translateY(-1px);
+    }
+
+
+    /* ================= EDIT ================= */
+
+    .edit-button {
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        padding: 8px 12px;
+
+        margin-right: 8px;
+
+        background: #f3f4f6;
+        color: #374151;
+
+        border-radius: 7px;
+
+        text-decoration: none;
+
+        font-size: 13px;
+        font-weight: 600;
+
+        transition: 0.2s ease;
+    }
+
+    .edit-button:hover {
+        background: #e5e7eb;
+
+        transform: translateY(-1px);
+    }
+
+
+    /* ================= DELETE ================= */
+
+    .delete-button {
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        padding: 8px 12px;
+
+        background: #fef2f2;
+        color: #dc2626;
+
+        border: none;
+
+        border-radius: 7px;
+
+        font-size: 13px;
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition: 0.2s ease;
+    }
+
+    .delete-button:hover {
+        background: #fee2e2;
+
+        transform: translateY(-1px);
+    }
+
+
+    /* ================= EMPTY STATE ================= */
+
+    .empty-state {
+        background: white;
+
+        border-radius: 14px;
+
+        padding: 70px 25px;
+
+        text-align: center;
+
+        border: 1px solid #eeeeee;
+
+        box-shadow:
+            0 4px 18px rgba(0, 0, 0, 0.06);
+    }
+
+
+    .empty-state h2 {
+        margin-bottom: 10px;
+
+        color: #374151;
+    }
+
+
+    .empty-state p {
+        color: #6b7280;
+
+        margin-bottom: 25px;
+    }
+
+
+    /* =========================================
+       PROFESSIONAL CAREERTRACK NAVBAR
+       ========================================= */
+
+    .app-nav {
+        width: 100%;
+        min-height: 72px;
+
+        padding: 0 5%;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        background: #ffffff;
+
+        border-bottom: 1px solid #e5e7eb;
+
+        box-sizing: border-box;
+
+        gap: 40px;
+    }
+
+
+    /* ================= LOGO ================= */
+
+    .app-nav h2 {
+        margin: 0;
+
+        flex-shrink: 0;
+
+        white-space: nowrap;
+
+        font-size: 25px;
+        font-weight: 800;
+
+        color: #111827;
+    }
+
+
+    /* ================= NAVIGATION LINKS ================= */
+
+    .app-nav-links {
+        display: flex;
+
+        align-items: center;
+
+        justify-content: flex-end;
+
+        gap: 14px;
+
+        margin-left: auto;
+
+        flex-wrap: nowrap;
+    }
+
+
+    /* ================= EACH NAV LINK ================= */
+
+    .app-nav-links a {
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        padding: 10px 13px;
+
+        margin: 0;
+
+        border-radius: 8px;
+
+        text-decoration: none;
+
+        white-space: nowrap;
+
+        color: #4b5563;
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        transition:
+            background 0.2s ease,
+            color 0.2s ease;
+    }
+
+
+    /* ================= NAV HOVER ================= */
+
+    .app-nav-links a:hover {
+        color: #2563eb;
+
+        background: #eff6ff;
+    }
+
+
+    /* ================= ACTIVE APPLICATIONS ================= */
+
+    .app-nav-links a.active {
+        color: #2563eb;
+
+        background: #eff6ff;
+    }
+
+
+    /* ================= LOGOUT ================= */
+
+    .app-nav-links a.logout-link {
+        color: #dc2626;
+    }
+
+    .app-nav-links a.logout-link:hover {
+        color: #b91c1c;
+
+        background: #fef2f2;
+    }
+
+
+    /* ================= TABLET ================= */
+
+    @media (max-width: 1200px) {
+
+        .app-nav {
+            padding: 0 3%;
+
+            gap: 20px;
+        }
+
+        .app-nav-links {
+            gap: 7px;
+        }
+
+        .app-nav-links a {
+            padding: 9px 10px;
+
+            font-size: 13px;
+        }
+    }
+
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 900px) {
+
+        .app-nav {
+            min-height: auto;
+
+            padding: 15px 20px;
+
+            flex-direction: column;
+
+            gap: 15px;
+        }
+
+        .app-nav-links {
+            width: 100%;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+        }
+
+        .app-nav-links a {
+            padding: 8px 12px;
+
+            font-size: 13px;
+        }
+    }
+
+
+    /* ================= SMALL MOBILE ================= */
+
+    @media (max-width: 700px) {
+
+        .applications {
+            margin: 25px auto;
+
+            padding: 0 15px;
+        }
+
+        .applications h1 {
+            font-size: 26px;
+        }
+
+        .application-table {
+            overflow-x: auto;
+        }
+
+        .application-table table {
+            min-width: 850px;
+        }
+    }
+
+
+    @media (max-width: 600px) {
+
+        .app-nav {
+            padding: 14px 15px;
+        }
+
+        .app-nav-links {
+            gap: 5px;
+        }
+
+        .app-nav-links a {
+            padding: 7px 9px;
+
+            font-size: 12px;
+        }
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- ================= NAVBAR ================= -->
+
+<nav class="app-nav">
+
+    <h2>CareerTrack</h2>
+
+    <div class="app-nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="/dashboard">Dashboard</a>
+
+        <a href="/jobs">Jobs</a>
+
+        <a href="/internships">Internships</a>
+
+        <a href="/assessments">Assessments</a>
+
+        <a href="/applications" class="active">Applications</a>
+
+        <a href="/interviews">Interviews</a>
+
+        <a href="/profile">Profile</a>
+
+        <a href="/logout" class="logout-link">Logout</a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= APPLICATIONS ================= -->
+
+<section class="applications">
+
+
+    <h1>My Applications</h1>
+
+    <p>
+        Track and manage all your job and internship applications.
+    </p>
+
+
+    <!-- ================= ADD APPLICATION ================= -->
+
+    <a href="/add-application" class="add-button">
+        + Add Application
+    </a>
+
+
+    {% if applications %}
+
+
+        <!-- ================= APPLICATION TABLE ================= -->
+
+        <div class="application-table">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Company
+                        </th>
+
+                        <th>
+                            Position
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Applied Date
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    {% for application in applications %}
+
+
+                        <tr>
+
+
+                            <!-- ================= COMPANY ================= -->
+
+                            <td>
+
+                                <strong>
+                                    {{ application["company"] }}
+                                </strong>
+
+                            </td>
+
+
+                            <!-- ================= POSITION ================= -->
+
+                            <td>
+
+                                {{ application["position"] }}
+
+                            </td>
+
+
+                            <!-- ================= STATUS ================= -->
+
+                            <td>
+
+
+                                {% if application["status"] == "Applied" %}
+
+                                    <span class="status applied">
+                                        📤 Applied
+                                    </span>
+
+
+                                {% elif application["status"] == "Assessment" %}
+
+                                    <span class="status assessment">
+                                        📝 Assessment
+                                    </span>
+
+
+                                {% elif application["status"] == "Interview" %}
+
+                                    <span class="status interview">
+                                        🎤 Interview
+                                    </span>
+
+
+                                {% elif application["status"] == "Selected" %}
+
+                                    <span class="status selected">
+                                        🎉 Selected
+                                    </span>
+
+
+                                {% elif application["status"] == "Rejected" %}
+
+                                    <span class="status rejected">
+                                        ❌ Rejected
+                                    </span>
+
+
+                                {% elif application["status"] == "Withdrawn" %}
+
+                                    <span class="status withdrawn">
+                                        ↩️ Withdrawn
+                                    </span>
+
+
+                                {% else %}
+
+                                    <span class="status">
+                                        {{ application["status"] }}
+                                    </span>
+
+                                {% endif %}
+
+
+                            </td>
+
+
+                            <!-- ================= DATE ================= -->
+
+                            <td>
+
+                                {{ application["application_date"] }}
+
+                            </td>
+
+
+                            <!-- ================= ACTIONS ================= -->
+
+                            <td>
+
+
+                                <!-- VIEW -->
+
+                                <a
+                                    href="/application/{{ application['id'] }}"
+                                    class="view-button"
+                                >
+                                    👁️ View
+                                </a>
+
+
+                                <!-- EDIT -->
+
+                                <a
+                                    href="/edit-application/{{ application['id'] }}"
+                                    class="edit-button"
+                                >
+                                    ✏️ Edit
+                                </a>
+
+
+                                <!-- DELETE -->
+
+                                <form
+                                    action="/delete-application/{{ application['id'] }}"
+                                    method="POST"
+                                    style="display: inline;"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="delete-button"
+                                        onclick="return confirm('Are you sure you want to delete this application?')"
+                                    >
+                                        🗑️ Delete
+                                    </button>
+
+                                </form>
+
+
+                            </td>
+
+
+                        </tr>
+
+
+                    {% endfor %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    {% else %}
+
+
+        <!-- ================= EMPTY STATE ================= -->
+
+        <div class="empty-state">
+
+
+            <h2>
+                No Applications Yet
+            </h2>
+
+
+            <p>
+                Start tracking your job and internship applications.
+            </p>
+
+
+            <a
+                href="/add-application"
+                class="add-button"
+            >
+
+                + Add Your First Application
+
+            </a>
+
+
+        </div>
+
+
+    {% endif %}
+
+
+</section>
+```
+
+</body>
+
+</html>

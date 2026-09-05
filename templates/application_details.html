@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Application Details - CareerTrack</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <nav>
+
+        <h2>CareerTrack</h2>
+
+        <div>
+
+            <a href="/">Home</a>
+
+            <a href="/dashboard">Dashboard</a>
+
+            <a href="/jobs">Jobs</a>
+
+            <a href="/internships">Internships</a>
+
+            <a href="/assessments">Assessments</a>
+
+            <a href="/applications">Applications</a>
+
+            <a href="/interviews">Interviews</a>
+
+            <a href="/profile">Profile</a>
+
+            <a href="/logout">Logout</a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <div class="container">
+
+        <h1>Application Details</h1>
+
+
+        <!-- =================================================
+             APPLICATION INFORMATION
+        ================================================== -->
+
+        <div class="card">
+
+            <h2>
+                {{ application["company"] }}
+            </h2>
+
+
+            <p>
+
+                <strong>Position:</strong>
+
+                {{ application["position"] }}
+
+            </p>
+
+
+            <p>
+
+                <strong>Current Status:</strong>
+
+                <span class="status-badge">
+
+                    {{ application["status"] }}
+
+                </span>
+
+            </p>
+
+
+            <p>
+
+                <strong>Application Date:</strong>
+
+                {{ application["application_date"] }}
+
+            </p>
+
+
+            <div style="margin-top: 20px;">
+
+                <a
+                    href="/edit-application/{{ application['id'] }}"
+                    class="btn"
+                >
+                    Edit Application
+                </a>
+
+
+                <a
+                    href="/applications"
+                    class="btn"
+                >
+                    Back to Applications
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             APPLICATION TIMELINE
+        ================================================== -->
+
+        <div class="card">
+
+            <h2>Application Timeline</h2>
+
+
+            {% if history %}
+
+                <div class="timeline">
+
+                    {% for item in history %}
+
+                        <div class="timeline-item">
+
+                            <div class="timeline-dot">
+                                ●
+                            </div>
+
+
+                            <div class="timeline-content">
+
+                                <h3>
+
+                                    {{ item["status"] }}
+
+                                </h3>
+
+
+                                <p>
+
+                                    {{ item["changed_date"] }}
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <p>
+                    No application history available.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

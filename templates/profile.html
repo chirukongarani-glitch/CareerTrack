@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile - CareerTrack</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        /* ==============================
+           PAGE
+        ============================== */
+
+        body {
+            margin: 0;
+            background: #f8fafc;
+            color: #111827;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+        /* ==============================
+           NAVBAR
+        ============================== */
+
+        .app-nav {
+            width: 100%;
+            min-height: 72px;
+
+            padding: 0 5%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 40px;
+
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+
+            box-sizing: border-box;
+        }
+
+        .app-nav h2 {
+            margin: 0;
+
+            flex-shrink: 0;
+            white-space: nowrap;
+
+            font-size: 25px;
+            font-weight: 800;
+
+            color: #111827;
+        }
+
+        .app-nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            gap: 14px;
+
+            margin-left: auto;
+
+            flex-wrap: nowrap;
+        }
+
+        .app-nav-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 10px 13px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+            white-space: nowrap;
+
+            color: #4b5563;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .app-nav-links a:hover {
+            color: #2563eb;
+            background: #eff6ff;
+
+            transform: translateY(-1px);
+        }
+
+        .app-nav-links a.active {
+            color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .app-nav-links a.logout-link {
+            color: #dc2626;
+        }
+
+        .app-nav-links a.logout-link:hover {
+            color: #b91c1c;
+            background: #fef2f2;
+        }
+
+
+        /* ==============================
+           MAIN PAGE
+        ============================== */
+
+        .profile-page {
+            width: 100%;
+            max-width: 1050px;
+
+            margin: 0 auto;
+
+            padding: 50px 24px 70px;
+
+            box-sizing: border-box;
+        }
+
+
+        /* ==============================
+           PAGE HEADER
+        ============================== */
+
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-header .eyebrow {
+            margin: 0 0 8px;
+
+            color: #2563eb;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .page-header h1 {
+            margin: 0 0 10px;
+
+            color: #111827;
+
+            font-size: 34px;
+            line-height: 1.2;
+            font-weight: 800;
+        }
+
+        .page-header p {
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 16px;
+        }
+
+
+        /* ==============================
+           PROFILE CARD
+        ============================== */
+
+        .profile-card {
+            overflow: hidden;
+
+            background: #ffffff;
+
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+
+            box-shadow:
+                0 8px 25px rgba(15, 23, 42, 0.06);
+        }
+
+
+        /* ==============================
+           PROFILE TOP
+        ============================== */
+
+        .profile-top {
+            display: flex;
+            align-items: center;
+
+            gap: 22px;
+
+            padding: 30px 32px;
+
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .profile-avatar {
+            width: 76px;
+            height: 76px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #eff6ff;
+            color: #2563eb;
+
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        .profile-name {
+            min-width: 0;
+        }
+
+        .profile-name h2 {
+            margin: 0 0 6px;
+
+            color: #111827;
+
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .profile-name p {
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 14px;
+        }
+
+
+        /* ==============================
+           PROFILE DETAILS
+        ============================== */
+
+        .profile-details {
+            padding: 30px 32px;
+        }
+
+        .section-title {
+            margin: 0 0 20px;
+
+            color: #111827;
+
+            font-size: 18px;
+            font-weight: 750;
+        }
+
+        .details-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 18px;
+        }
+
+        .detail-item {
+            padding: 18px;
+
+            background: #f9fafb;
+
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+
+            min-width: 0;
+        }
+
+        .detail-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .detail-label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #6b7280;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .detail-value {
+            display: block;
+
+            color: #111827;
+
+            font-size: 15px;
+            font-weight: 600;
+
+            line-height: 1.5;
+
+            overflow-wrap: anywhere;
+        }
+
+
+        /* ==============================
+           PROFILE ACTIONS
+        ============================== */
+
+        .profile-actions {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 24px 32px;
+
+            background: #fafafa;
+
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .profile-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-height: 44px;
+
+            padding: 0 20px;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            text-decoration: none;
+
+            box-sizing: border-box;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .dashboard-btn {
+            background: #2563eb;
+
+            border: 1px solid #2563eb;
+
+            color: #ffffff;
+        }
+
+        .dashboard-btn:hover {
+            background: #1d4ed8;
+            border-color: #1d4ed8;
+
+            transform: translateY(-1px);
+        }
+
+        .logout-btn {
+            background: #ffffff;
+
+            border: 1px solid #fecaca;
+
+            color: #dc2626;
+        }
+
+        .logout-btn:hover {
+            background: #fef2f2;
+
+            border-color: #fca5a5;
+
+            color: #b91c1c;
+        }
+
+
+        /* ==============================
+           RESPONSIVE
+        ============================== */
+
+        @media (max-width: 1200px) {
+
+            .app-nav {
+                padding: 0 3%;
+                gap: 20px;
+            }
+
+            .app-nav-links {
+                gap: 7px;
+            }
+
+            .app-nav-links a {
+                padding: 9px 10px;
+                font-size: 13px;
+            }
+        }
+
+
+        @media (max-width: 900px) {
+
+            .app-nav {
+                min-height: auto;
+
+                padding: 15px 20px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            .app-nav-links {
+                width: 100%;
+
+                justify-content: center;
+
+                flex-wrap: wrap;
+
+                gap: 8px;
+            }
+
+            .app-nav-links a {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+
+            .profile-page {
+                padding-top: 35px;
+            }
+        }
+
+
+        @media (max-width: 700px) {
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-item.full-width {
+                grid-column: auto;
+            }
+
+            .profile-top {
+                padding: 24px;
+
+                align-items: flex-start;
+            }
+
+            .profile-details {
+                padding: 24px;
+            }
+
+            .profile-actions {
+                padding: 20px 24px;
+
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .profile-btn {
+                width: 100%;
+            }
+
+            .page-header h1 {
+                font-size: 28px;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .app-nav {
+                padding: 14px 15px;
+            }
+
+            .app-nav-links {
+                gap: 5px;
+            }
+
+            .app-nav-links a {
+                padding: 7px 9px;
+                font-size: 12px;
+            }
+
+            .profile-page {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .profile-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .profile-avatar {
+                width: 65px;
+                height: 65px;
+
+                font-size: 25px;
+            }
+
+            .profile-name h2 {
+                font-size: 22px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- ==============================
+         NAVBAR
+    ============================== -->
+
+    <nav class="app-nav">
+
+        <h2>CareerTrack</h2>
+
+        <div class="app-nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/jobs">
+                Jobs
+            </a>
+
+            <a href="/internships">
+                Internships
+            </a>
+
+            <a href="/assessments">
+                Assessments
+            </a>
+
+            <a href="/applications">
+                Applications
+            </a>
+
+            <a href="/interviews">
+                Interviews
+            </a>
+
+            <a href="/profile" class="active">
+                Profile
+            </a>
+
+            <a href="/logout" class="logout-link">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ==============================
+         MAIN CONTENT
+    ============================== -->
+
+    <main class="profile-page">
+
+
+        <!-- PAGE HEADER -->
+
+        <div class="page-header">
+
+            <p class="eyebrow">
+                Account
+            </p>
+
+            <h1>
+                My Profile
+            </h1>
+
+            <p>
+                View your personal and academic information stored in CareerTrack.
+            </p>
+
+        </div>
+
+
+        <!-- PROFILE CARD -->
+
+        <section class="profile-card">
+
+
+            <!-- PROFILE SUMMARY -->
+
+            <div class="profile-top">
+
+                <div class="profile-avatar">
+                    {{ user["name"][0]|upper }}
+                </div>
+
+                <div class="profile-name">
+
+                    <h2>
+                        {{ user["name"] }}
+                    </h2>
+
+                    <p>
+                        CareerTrack Profile
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROFILE DETAILS -->
+
+            <div class="profile-details">
+
+                <h3 class="section-title">
+                    Personal & Academic Information
+                </h3>
+
+
+                <div class="details-grid">
+
+
+                    <!-- EMAIL -->
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            Email
+                        </span>
+
+                        <span class="detail-value">
+                            {{ user["email"] }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- PHONE -->
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            Phone
+                        </span>
+
+                        <span class="detail-value">
+                            {{ user["phone"] }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- COLLEGE -->
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            College / University
+                        </span>
+
+                        <span class="detail-value">
+                            {{ user["college"] }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- DEGREE -->
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            Degree
+                        </span>
+
+                        <span class="detail-value">
+                            {{ user["degree"] }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- BRANCH -->
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            Branch
+                        </span>
+
+                        <span class="detail-value">
+                            {{ user["branch"] }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- GRADUATION YEAR -->
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            Graduation Year
+                        </span>
+
+                        <span class="detail-value">
+                            {{ user["graduation_year"] }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- SKILLS -->
+
+                    <div class="detail-item full-width">
+
+                        <span class="detail-label">
+                            Skills
+                        </span>
+
+                        <span class="detail-value">
+                            {{ user["skills"] }}
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="profile-actions">
+
+                <a
+                    href="/dashboard"
+                    class="profile-btn dashboard-btn"
+                >
+                    ← Back to Dashboard
+                </a>
+
+                <a
+                    href="/logout"
+                    class="profile-btn logout-btn"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+</body>
+
+</html>

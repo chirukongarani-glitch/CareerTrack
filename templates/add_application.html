@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Add Application - CareerTrack</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <h2>CareerTrack</h2>
+
+        <div>
+
+            <a href="/">Home</a>
+
+            <a href="/dashboard">Dashboard</a>
+
+            <a href="/jobs">Jobs</a>
+
+            <a href="/internships">Internships</a>
+
+            <a href="/assessments">Assessments</a>
+
+            <a href="/applications">Applications</a>
+
+            <a href="/interviews">Interviews</a>
+
+            <a href="/profile">Profile</a>
+
+            <a href="/logout">Logout</a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= FORM ================= -->
+
+    <section class="form-section">
+
+        <h1>Add Job / Internship Application</h1>
+
+        <p>
+            Track a new job or internship application.
+        </p>
+
+
+        <form method="POST">
+
+
+            <!-- COMPANY -->
+
+            <label>
+                Company Name
+            </label>
+
+            <input
+                type="text"
+                name="company"
+                placeholder="Enter company name"
+                required
+            >
+
+
+            <!-- POSITION -->
+
+            <label>
+                Position
+            </label>
+
+            <input
+                type="text"
+                name="position"
+                placeholder="Enter position"
+                required
+            >
+
+
+            <!-- STATUS -->
+
+            <label>
+                Application Status
+            </label>
+
+            <select
+                name="status"
+                required
+            >
+
+                <option value="Applied">
+                    Applied
+                </option>
+
+                <option value="Shortlisted">
+                    Shortlisted
+                </option>
+
+                <option value="Assessment">
+                    Assessment
+                </option>
+
+                <option value="Interview">
+                    Interview
+                </option>
+
+                <option value="Selected">
+                    Selected
+                </option>
+
+                <option value="Rejected">
+                    Rejected
+                </option>
+
+                <option value="Withdrawn">
+                    Withdrawn
+                </option>
+
+            </select>
+
+
+            <!-- APPLICATION DATE -->
+
+            <label>
+                Application Date
+            </label>
+
+            <input
+                type="date"
+                name="application_date"
+            >
+
+
+            <!-- BUTTON -->
+
+            <button type="submit">
+                Save Application
+            </button>
+
+
+        </form>
+
+    </section>
+
+
+</body>
+
+</html>

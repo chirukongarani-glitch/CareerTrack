@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Interview - CareerTrack</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        /* ==============================
+           PAGE
+        ============================== */
+
+        body {
+            margin: 0;
+            background: #f8fafc;
+            color: #111827;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* ==============================
+           NAVBAR
+        ============================== */
+
+        .app-nav {
+            width: 100%;
+            min-height: 72px;
+            padding: 0 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+
+            box-sizing: border-box;
+        }
+
+        .app-nav h2 {
+            margin: 0;
+            flex-shrink: 0;
+            white-space: nowrap;
+
+            font-size: 25px;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        .app-nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            gap: 14px;
+            margin-left: auto;
+
+            flex-wrap: nowrap;
+        }
+
+        .app-nav-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 10px 13px;
+            margin: 0;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+            white-space: nowrap;
+
+            color: #4b5563;
+            font-size: 14px;
+            font-weight: 600;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .app-nav-links a:hover {
+            color: #2563eb;
+            background: #eff6ff;
+            transform: translateY(-1px);
+        }
+
+        .app-nav-links a.active {
+            color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .app-nav-links a.logout-link {
+            color: #dc2626;
+        }
+
+        .app-nav-links a.logout-link:hover {
+            color: #b91c1c;
+            background: #fef2f2;
+        }
+
+        /* ==============================
+           MAIN CONTAINER
+        ============================== */
+
+        .edit-page {
+            width: 100%;
+            max-width: 1050px;
+
+            margin: 0 auto;
+            padding: 50px 24px 70px;
+
+            box-sizing: border-box;
+        }
+
+        /* ==============================
+           PAGE HEADER
+        ============================== */
+
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-header .eyebrow {
+            margin: 0 0 8px;
+
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .page-header h1 {
+            margin: 0 0 10px;
+
+            font-size: 34px;
+            line-height: 1.2;
+            font-weight: 800;
+
+            color: #111827;
+        }
+
+        .page-header p {
+            margin: 0;
+
+            color: #6b7280;
+            font-size: 16px;
+        }
+
+        /* ==============================
+           FORM CARD
+        ============================== */
+
+        .form-card {
+            background: #ffffff;
+
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+
+            padding: 32px;
+
+            box-shadow:
+                0 8px 25px rgba(15, 23, 42, 0.06);
+        }
+
+        .form-section-title {
+            margin: 0 0 22px;
+
+            font-size: 18px;
+            font-weight: 750;
+
+            color: #111827;
+        }
+
+        /* ==============================
+           FORM GRID
+        ============================== */
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+
+            gap: 22px 24px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+
+            color: #374151;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+
+            padding: 12px 14px;
+
+            box-sizing: border-box;
+
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+
+            background: #ffffff;
+            color: #111827;
+
+            font-family: inherit;
+            font-size: 14px;
+
+            outline: none;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #9ca3af;
+        }
+
+        .form-group input:hover,
+        .form-group select:hover,
+        .form-group textarea:hover {
+            border-color: #9ca3af;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+        .form-group textarea {
+            min-height: 130px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        /* ==============================
+           ACTION BUTTONS
+        ============================== */
+
+        .form-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            gap: 12px;
+
+            margin-top: 30px;
+            padding-top: 24px;
+
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-height: 44px;
+
+            padding: 0 20px;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+
+            box-sizing: border-box;
+        }
+
+        .btn-primary {
+            border: 1px solid #2563eb;
+
+            background: #2563eb;
+            color: #ffffff;
+
+            box-shadow:
+                0 4px 10px rgba(37, 99, 235, 0.18);
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            border-color: #1d4ed8;
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 6px 14px rgba(37, 99, 235, 0.22);
+        }
+
+        .btn-secondary {
+            border: 1px solid #d1d5db;
+
+            background: #ffffff;
+            color: #374151;
+        }
+
+        .btn-secondary:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        /* ==============================
+           RESPONSIVE
+        ============================== */
+
+        @media (max-width: 1200px) {
+
+            .app-nav {
+                padding: 0 3%;
+                gap: 20px;
+            }
+
+            .app-nav-links {
+                gap: 7px;
+            }
+
+            .app-nav-links a {
+                padding: 9px 10px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 900px) {
+
+            .app-nav {
+                min-height: auto;
+
+                padding: 15px 20px;
+
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .app-nav-links {
+                width: 100%;
+
+                justify-content: center;
+
+                flex-wrap: wrap;
+
+                gap: 8px;
+            }
+
+            .app-nav-links a {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+
+            .edit-page {
+                padding-top: 35px;
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: auto;
+            }
+
+            .form-card {
+                padding: 22px;
+            }
+
+            .page-header h1 {
+                font-size: 28px;
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+                align-items: stretch;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .app-nav {
+                padding: 14px 15px;
+            }
+
+            .app-nav-links {
+                gap: 5px;
+            }
+
+            .app-nav-links a {
+                padding: 7px 9px;
+                font-size: 12px;
+            }
+
+            .edit-page {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==============================
+         NAVBAR
+    ============================== -->
+
+    <nav class="app-nav">
+
+        <h2>CareerTrack</h2>
+
+        <div class="app-nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/jobs">
+                Jobs
+            </a>
+
+            <a href="/internships">
+                Internships
+            </a>
+
+            <a href="/assessments">
+                Assessments
+            </a>
+
+            <a href="/applications">
+                Applications
+            </a>
+
+            <a href="/interviews" class="active">
+                Interviews
+            </a>
+
+            <a href="/profile">
+                Profile
+            </a>
+
+            <a href="/logout" class="logout-link">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ==============================
+         MAIN CONTENT
+    ============================== -->
+
+    <main class="edit-page">
+
+        <div class="page-header">
+
+            <p class="eyebrow">
+                Interview Management
+            </p>
+
+            <h1>
+                Edit Interview
+            </h1>
+
+            <p>
+                Update your interview details and keep your career tracking information accurate.
+            </p>
+
+        </div>
+
+
+        <!-- ==============================
+             FORM
+        ============================== -->
+
+        <div class="form-card">
+
+            <h2 class="form-section-title">
+                Interview Details
+            </h2>
+
+            <form method="POST">
+
+                <div class="form-grid">
+
+                    <!-- COMPANY -->
+
+                    <div class="form-group">
+
+                        <label for="company">
+                            Company
+                        </label>
+
+                        <input
+                            type="text"
+                            id="company"
+                            name="company"
+                            value="{{ interview['company'] }}"
+                            placeholder="Example: Google"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- POSITION -->
+
+                    <div class="form-group">
+
+                        <label for="position">
+                            Position
+                        </label>
+
+                        <input
+                            type="text"
+                            id="position"
+                            name="position"
+                            value="{{ interview['position'] }}"
+                            placeholder="Example: Software Engineer"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- INTERVIEW ROUND -->
+
+                    <div class="form-group">
+
+                        <label for="interview_round">
+                            Interview Round
+                        </label>
+
+                        <select
+                            id="interview_round"
+                            name="interview_round"
+                            required
+                        >
+
+                            <option value="HR Round"
+                                {% if interview['interview_round'] == 'HR Round' %}
+                                    selected
+                                {% endif %}
+                            >
+                                HR Round
+                            </option>
+
+                            <option value="Technical Round"
+                                {% if interview['interview_round'] == 'Technical Round' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Technical Round
+                            </option>
+
+                            <option value="Coding Round"
+                                {% if interview['interview_round'] == 'Coding Round' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Coding Round
+                            </option>
+
+                            <option value="Managerial Round"
+                                {% if interview['interview_round'] == 'Managerial Round' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Managerial Round
+                            </option>
+
+                            <option value="Final Round"
+                                {% if interview['interview_round'] == 'Final Round' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Final Round
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- INTERVIEW DATE -->
+
+                    <div class="form-group">
+
+                        <label for="interview_date">
+                            Interview Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="interview_date"
+                            name="interview_date"
+                            value="{{ interview['interview_date'] }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- INTERVIEW TIME -->
+
+                    <div class="form-group">
+
+                        <label for="interview_time">
+                            Interview Time
+                        </label>
+
+                        <input
+                            type="time"
+                            id="interview_time"
+                            name="interview_time"
+                            value="{{ interview['interview_time'] }}"
+                        >
+
+                    </div>
+
+
+                    <!-- MODE -->
+
+                    <div class="form-group">
+
+                        <label for="mode">
+                            Mode
+                        </label>
+
+                        <select
+                            id="mode"
+                            name="mode"
+                        >
+
+                            <option value="Online"
+                                {% if interview['mode'] == 'Online' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Online
+                            </option>
+
+                            <option value="Offline"
+                                {% if interview['mode'] == 'Offline' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Offline
+                            </option>
+
+                            <option value="Phone"
+                                {% if interview['mode'] == 'Phone' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Phone
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- MEETING LINK -->
+
+                    <div class="form-group">
+
+                        <label for="meeting_link">
+                            Meeting Link
+                        </label>
+
+                        <input
+                            type="url"
+                            id="meeting_link"
+                            name="meeting_link"
+                            value="{{ interview['meeting_link'] }}"
+                            placeholder="https://meet.google.com/..."
+                        >
+
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    <div class="form-group">
+
+                        <label for="status">
+                            Status
+                        </label>
+
+                        <select
+                            id="status"
+                            name="status"
+                            required
+                        >
+
+                            <option value="Scheduled"
+                                {% if interview['status'] == 'Scheduled' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Scheduled
+                            </option>
+
+                            <option value="Completed"
+                                {% if interview['status'] == 'Completed' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Completed
+                            </option>
+
+                            <option value="Cancelled"
+                                {% if interview['status'] == 'Cancelled' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Cancelled
+                            </option>
+
+                            <option value="Rescheduled"
+                                {% if interview['status'] == 'Rescheduled' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Rescheduled
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- NOTES -->
+
+                    <div class="form-group full-width">
+
+                        <label for="notes">
+                            Notes
+                        </label>
+
+                        <textarea
+                            id="notes"
+                            name="notes"
+                            rows="5"
+                            placeholder="Interview preparation notes, topics to revise, recruiter information..."
+                        >{{ interview['notes'] }}</textarea>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==============================
+                     BUTTONS
+                ============================== -->
+
+                <div class="form-actions">
+
+                    <a
+                        href="/interviews"
+                        class="btn btn-secondary"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        ✓ Update Interview
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

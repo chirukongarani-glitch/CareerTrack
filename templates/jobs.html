@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Jobs - CareerTrack</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <style>
+
+        /* =========================================
+           PROFESSIONAL CAREERTRACK NAVBAR
+           ========================================= */
+
+        .app-nav {
+            width: 100%;
+            min-height: 72px;
+            padding: 0 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            box-sizing: border-box;
+        }
+
+        /* ================= LOGO ================= */
+
+        .app-nav h2 {
+            margin: 0;
+            flex-shrink: 0;
+            white-space: nowrap;
+            font-size: 25px;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        /* ================= NAVIGATION LINKS ================= */
+
+        .app-nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 14px;
+            margin-left: auto;
+            flex-wrap: nowrap;
+        }
+
+        /* ================= EACH LINK ================= */
+
+        .app-nav-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 13px;
+            margin: 0;
+            border-radius: 8px;
+            text-decoration: none;
+            white-space: nowrap;
+            color: #4b5563;
+            font-size: 14px;
+            font-weight: 600;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        /* ================= HOVER ================= */
+
+        .app-nav-links a:hover {
+            color: #2563eb;
+            background: #eff6ff;
+            transform: translateY(-1px);
+        }
+
+        /* ================= ACTIVE JOBS ================= */
+
+        .app-nav-links a.active {
+            color: #2563eb;
+            background: #eff6ff;
+        }
+
+        /* ================= LOGOUT ================= */
+
+        .app-nav-links a.logout-link {
+            color: #dc2626;
+        }
+
+        .app-nav-links a.logout-link:hover {
+            color: #b91c1c;
+            background: #fef2f2;
+        }
+
+        /* =========================================
+           JOB STATS
+           ========================================= */
+
+        .job-stats {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow:
+                0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-box h2 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .stat-box p {
+            margin: 5px 0 0;
+        }
+
+        /* =========================================
+           FORM GRID
+           ========================================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+        /* =========================================
+           JOB DESCRIPTION
+           ========================================= */
+
+        .job-description {
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           ACTION BUTTONS
+           ========================================= */
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        /* VIEW */
+
+        .details-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #0d6efd;
+            color: white;
+            padding: 8px 13px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .details-button:hover {
+            background: #0b5ed7;
+            transform: translateY(-1px);
+        }
+
+        /* EDIT */
+
+        .view-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #f3f4f6;
+            color: #374151;
+            padding: 8px 13px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .view-button:hover {
+            background: #e5e7eb;
+            transform: translateY(-1px);
+        }
+
+        /* DELETE */
+
+        .danger-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #dc3545;
+            color: white;
+            padding: 8px 13px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .danger-button:hover {
+            background: #bb2d3b;
+            transform: translateY(-1px);
+        }
+
+        /* =========================================
+           SEARCH GRID
+           ========================================= */
+
+        .search-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 15px;
+            align-items: end;
+        }
+
+        /* =========================================
+           TABLE
+           ========================================= */
+
+        .card table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 20px;
+            min-width: 850px;
+        }
+
+        .card th {
+            padding: 15px 18px;
+            background: #f8fafc;
+            color: #475569;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 700;
+            border-bottom: 1px solid #e5e7eb;
+            white-space: nowrap;
+        }
+
+        .card td {
+            padding: 17px 18px;
+            border-bottom: 1px solid #eef0f3;
+            color: #374151;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        .card tbody tr {
+            transition: 0.2s ease;
+        }
+
+        .card tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .card tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .card td strong {
+            color: #111827;
+            font-size: 15px;
+        }
+
+        /* =========================================
+           CARDS
+           ========================================= */
+
+        .card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow:
+                0 4px 18px rgba(0, 0, 0, 0.06);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #111827;
+        }
+
+        .card p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           BUTTON
+           ========================================= */
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 9px 15px;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 8px;
+            transition: 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        /* =========================================
+           TABLET
+           ========================================= */
+
+        @media (max-width: 1200px) {
+
+            .app-nav {
+                padding: 0 3%;
+                gap: 20px;
+            }
+
+            .app-nav-links {
+                gap: 7px;
+            }
+
+            .app-nav-links a {
+                padding: 9px 10px;
+                font-size: 13px;
+            }
+        }
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 800px) {
+
+            .form-grid,
+            .search-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .app-nav {
+                min-height: auto;
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .app-nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .app-nav-links a {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        /* =========================================
+           SMALL MOBILE
+           ========================================= */
+
+        @media (max-width: 600px) {
+
+            .app-nav {
+                padding: 14px 15px;
+            }
+
+            .app-nav-links {
+                gap: 5px;
+            }
+
+            .app-nav-links a {
+                padding: 7px 9px;
+                font-size: 12px;
+            }
+
+            .card {
+                padding: 18px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ======================================================
+         NAVIGATION
+    ======================================================= -->
+
+    <nav class="app-nav">
+
+        <h2>
+            CareerTrack
+        </h2>
+
+
+        <div class="app-nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/jobs" class="active">
+                Jobs
+            </a>
+
+            <a href="/internships">
+                Internships
+            </a>
+
+            <a href="/assessments">
+                Assessments
+            </a>
+
+            <a href="/applications">
+                Applications
+            </a>
+
+            <a href="/interviews">
+                Interviews
+            </a>
+
+            <a href="/profile">
+                Profile
+            </a>
+
+            <a href="/logout" class="logout-link">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ======================================================
+         MAIN CONTAINER
+    ======================================================= -->
+
+    <div class="container">
+
+
+        <!-- ==================================================
+             PAGE HEADER
+        =================================================== -->
+
+        <h1>
+            Available Jobs
+        </h1>
+
+
+        <p class="job-description">
+            Find, manage and track job opportunities that match
+            your career goals.
+        </p>
+
+
+        <!-- ==================================================
+             JOB STATISTICS
+        =================================================== -->
+
+        <div class="job-stats">
+
+            <div class="stat-box">
+
+                <h2>
+                    {{ total_jobs }}
+                </h2>
+
+                <p>
+                    Total Jobs
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             ADD JOB
+        =================================================== -->
+
+        <div class="card">
+
+
+            <h2>
+                ➕ Add New Job
+            </h2>
+
+
+            <p>
+                Add a job opportunity to your CareerTrack dashboard.
+            </p>
+
+
+            <form
+                method="POST"
+                action="/jobs"
+            >
+
+
+                <div class="form-grid">
+
+
+                    <!-- COMPANY -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Company *
+                        </label>
+
+                        <input
+                            type="text"
+                            name="company"
+                            placeholder="Example: TCS"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- POSITION -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Position *
+                        </label>
+
+                        <input
+                            type="text"
+                            name="position"
+                            placeholder="Example: Software Developer"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            name="location"
+                            placeholder="Example: Hyderabad"
+                        >
+
+                    </div>
+
+
+                    <!-- SALARY -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Salary in LPA
+                        </label>
+
+                        <input
+                            type="number"
+                            name="salary"
+                            placeholder="Example: 6 or 8.5"
+                            min="0"
+                            step="0.1"
+                        >
+
+                    </div>
+
+
+                    <!-- JOB DATE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Job Date
+                        </label>
+
+                        <input
+                            type="date"
+                            name="job_date"
+                            value="{{ today }}"
+                        >
+
+                    </div>
+
+
+                    <!-- BUTTON -->
+
+                    <div
+                        class="form-group"
+                        style="justify-content: end;"
+                    >
+
+                        <button
+                            type="submit"
+                            class="btn"
+                        >
+                            ➕ Add Job
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+        <!-- ==================================================
+             SEARCH AND FILTER
+        =================================================== -->
+
+        <div class="card">
+
+
+            <h2>
+                🔎 Search & Filter Jobs
+            </h2>
+
+
+            <form
+                method="GET"
+                action="/jobs"
+            >
+
+
+                <div class="search-grid">
+
+
+                    <!-- SEARCH -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Search
+                        </label>
+
+                        <input
+                            type="text"
+                            name="search"
+                            placeholder="Company or position"
+                            value="{{ search }}"
+                        >
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            name="location"
+                            placeholder="Example: Hyderabad"
+                            value="{{ location }}"
+                        >
+
+                    </div>
+
+
+                    <!-- SORT -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Sort By
+                        </label>
+
+
+                        <select name="sort">
+
+
+                            <option
+                                value="newest"
+                                {% if sort == "newest" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Newest First
+                            </option>
+
+
+                            <option
+                                value="oldest"
+                                {% if sort == "oldest" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Oldest First
+                            </option>
+
+
+                            <option
+                                value="company"
+                                {% if sort == "company" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Company Name
+                            </option>
+
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+                <div style="margin-top: 15px;">
+
+
+                    <button
+                        type="submit"
+                        class="btn"
+                    >
+                        🔍 Search
+                    </button>
+
+
+                    <a
+                        href="/jobs"
+                        class="btn"
+                    >
+                        Clear
+                    </a>
+
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+        <!-- ==================================================
+             JOB LIST
+        =================================================== -->
+
+        <div class="card">
+
+
+            <div
+                style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                "
+            >
+
+
+                <div>
+
+
+                    <h2>
+                        💼 Job Opportunities
+                    </h2>
+
+
+                    {% if search or location %}
+
+                        <p>
+
+                            Showing results for
+
+                            {% if search %}
+
+                                <strong>
+                                    "{{ search }}"
+                                </strong>
+
+                            {% endif %}
+
+
+                            {% if location %}
+
+                                in
+
+                                <strong>
+                                    "{{ location }}"
+                                </strong>
+
+                            {% endif %}
+
+                        </p>
+
+                    {% endif %}
+
+
+                </div>
+
+
+                <a
+                    href="/jobs"
+                    class="btn"
+                >
+                    🔄 Refresh
+                </a>
+
+
+            </div>
+
+
+            {% if jobs %}
+
+
+                <div style="overflow-x: auto;">
+
+
+                    <table>
+
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Company
+                                </th>
+
+                                <th>
+                                    Position
+                                </th>
+
+                                <th>
+                                    Location
+                                </th>
+
+                                <th>
+                                    Salary in LPA
+                                </th>
+
+                                <th>
+                                    Job Date
+                                </th>
+
+                                <th>
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                            {% for job in jobs %}
+
+
+                                <tr>
+
+
+                                    <!-- COMPANY -->
+
+                                    <td>
+
+                                        <strong>
+                                            {{ job["company"] }}
+                                        </strong>
+
+                                    </td>
+
+
+                                    <!-- POSITION -->
+
+                                    <td>
+                                        {{ job["position"] }}
+                                    </td>
+
+
+                                    <!-- LOCATION -->
+
+                                    <td>
+
+                                        {% if job["location"] %}
+
+                                            📍 {{ job["location"] }}
+
+                                        {% else %}
+
+                                            —
+
+                                        {% endif %}
+
+                                    </td>
+
+
+                                    <!-- SALARY -->
+
+                                    <td>
+
+                                        {% if job["salary"] %}
+
+                                            ₹{{ job["salary"] }} LPA
+
+                                        {% else %}
+
+                                            —
+
+                                        {% endif %}
+
+                                    </td>
+
+
+                                    <!-- DATE -->
+
+                                    <td>
+                                        {{ job["job_date"] }}
+                                    </td>
+
+
+                                    <!-- ACTIONS -->
+
+                                    <td>
+
+
+                                        <div class="action-buttons">
+
+
+                                            <!-- VIEW -->
+
+                                            <a
+                                                href="/job/{{ job['id'] }}"
+                                                class="details-button"
+                                            >
+                                                👁️ View
+                                            </a>
+
+
+                                            <!-- EDIT -->
+
+                                            <a
+                                                href="/edit-job/{{ job['id'] }}"
+                                                class="view-button"
+                                            >
+                                                ✏️ Edit
+                                            </a>
+
+
+                                            <!-- DELETE -->
+
+                                            <a
+                                                href="/delete-job/{{ job['id'] }}"
+                                                class="danger-button"
+                                                onclick="
+                                                    return confirm(
+                                                        'Are you sure you want to delete this job?'
+                                                    );
+                                                "
+                                            >
+                                                🗑️ Delete
+                                            </a>
+
+
+                                        </div>
+
+
+                                    </td>
+
+
+                                </tr>
+
+
+                            {% endfor %}
+
+
+                        </tbody>
+
+
+                    </table>
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <!-- ==================================================
+                     NO JOBS
+                =================================================== -->
+
+                <div
+                    style="
+                        text-align: center;
+                        padding: 40px;
+                    "
+                >
+
+
+                    <h3>
+                        🔍 No Jobs Found
+                    </h3>
+
+
+                    {% if search or location %}
+
+
+                        <p>
+                            Try changing your search or location filter.
+                        </p>
+
+
+                        <a
+                            href="/jobs"
+                            class="btn"
+                        >
+                            Show All Jobs
+                        </a>
+
+
+                    {% else %}
+
+
+                        <p>
+                            No job opportunities have been added yet.
+                        </p>
+
+
+                        <p>
+                            Use the Add New Job form above to add your
+                            first opportunity.
+                        </p>
+
+
+                    {% endif %}
+
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+        <!-- ==================================================
+             QUICK ACTION
+        =================================================== -->
+
+        <div
+            class="card"
+            style="text-align: center;"
+        >
+
+
+            <h3>
+                📊 Manage Your Career
+            </h3>
+
+
+            <p>
+                After applying to a job, track its progress from
+                the Applications section.
+            </p>
+
+
+            <a
+                href="/applications"
+                class="btn"
+            >
+                📋 View Applications
+            </a>
+
+
+            <a
+                href="/dashboard"
+                class="btn"
+            >
+                📊 Dashboard
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

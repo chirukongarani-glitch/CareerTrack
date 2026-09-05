@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Edit Application - CareerTrack</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <h2>CareerTrack</h2>
+
+        <div>
+
+            <a href="/">Home</a>
+
+            <a href="/dashboard">Dashboard</a>
+
+            <a href="/jobs">Jobs</a>
+
+            <a href="/internships">Internships</a>
+
+            <a href="/assessments">Assessments</a>
+
+            <a href="/applications">Applications</a>
+
+            <a href="/interviews">Interviews</a>
+
+            <a href="/profile">Profile</a>
+
+            <a href="/logout">Logout</a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= FORM ================= -->
+
+    <section class="form-section">
+
+        <h1>Edit Application</h1>
+
+        <p>
+            Update your application details and status.
+        </p>
+
+
+        <form method="POST">
+
+
+            <!-- COMPANY -->
+
+            <label>
+                Company Name
+            </label>
+
+            <input
+                type="text"
+                name="company"
+                value="{{ application['company'] }}"
+                required
+            >
+
+
+            <!-- POSITION -->
+
+            <label>
+                Position
+            </label>
+
+            <input
+                type="text"
+                name="position"
+                value="{{ application['position'] }}"
+                required
+            >
+
+
+            <!-- STATUS -->
+
+            <label>
+                Application Status
+            </label>
+
+            <select
+                name="status"
+                required
+            >
+
+                <option value="Applied"
+                    {% if application['status'] == 'Applied' %}
+                        selected
+                    {% endif %}>
+                    Applied
+                </option>
+
+                <option value="Shortlisted"
+                    {% if application['status'] == 'Shortlisted' %}
+                        selected
+                    {% endif %}>
+                    Shortlisted
+                </option>
+
+                <option value="Assessment"
+                    {% if application['status'] == 'Assessment' %}
+                        selected
+                    {% endif %}>
+                    Assessment
+                </option>
+
+                <option value="Interview"
+                    {% if application['status'] == 'Interview' %}
+                        selected
+                    {% endif %}>
+                    Interview
+                </option>
+
+                <option value="Selected"
+                    {% if application['status'] == 'Selected' %}
+                        selected
+                    {% endif %}>
+                    Selected
+                </option>
+
+                <option value="Rejected"
+                    {% if application['status'] == 'Rejected' %}
+                        selected
+                    {% endif %}>
+                    Rejected
+                </option>
+
+                <option value="Withdrawn"
+                    {% if application['status'] == 'Withdrawn' %}
+                        selected
+                    {% endif %}>
+                    Withdrawn
+                </option>
+
+            </select>
+
+
+            <!-- APPLICATION DATE -->
+
+            <label>
+                Application Date
+            </label>
+
+            <input
+                type="date"
+                name="application_date"
+                value="{{ application['application_date'] }}"
+                required
+            >
+
+
+            <!-- BUTTON -->
+
+            <button type="submit">
+                Save Changes
+            </button>
+
+            <a href="/applications">
+                Cancel
+            </a>
+
+        </form>
+
+    </section>
+
+
+</body>
+
+</html>

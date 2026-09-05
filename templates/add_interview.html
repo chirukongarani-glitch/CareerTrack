@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Interview - CareerTrack</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <style>
+
+        /* =========================================
+           CAREERTRACK NAVBAR
+           ========================================= */
+
+        .app-nav {
+            width: 100%;
+            min-height: 72px;
+            padding: 0 5%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 40px;
+
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+
+            box-sizing: border-box;
+        }
+
+
+        /* LOGO */
+
+        .app-nav h2 {
+            margin: 0;
+
+            flex-shrink: 0;
+            white-space: nowrap;
+
+            font-size: 25px;
+            font-weight: 800;
+
+            color: #111827;
+        }
+
+
+        /* NAV LINKS */
+
+        .app-nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            gap: 14px;
+
+            margin-left: auto;
+
+            flex-wrap: nowrap;
+        }
+
+
+        .app-nav-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 10px 13px;
+            margin: 0;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+            white-space: nowrap;
+
+            color: #4b5563;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+
+        .app-nav-links a:hover {
+            color: #2563eb;
+            background: #eff6ff;
+
+            transform: translateY(-1px);
+        }
+
+
+        .app-nav-links a.active {
+            color: #2563eb;
+            background: #eff6ff;
+        }
+
+
+        .app-nav-links a.logout-link {
+            color: #dc2626;
+        }
+
+
+        .app-nav-links a.logout-link:hover {
+            color: #b91c1c;
+            background: #fef2f2;
+        }
+
+
+        /* =========================================
+           PAGE
+           ========================================= */
+
+        .interview-page {
+            max-width: 900px;
+
+            margin: 45px auto;
+
+            padding: 0 25px;
+        }
+
+
+        /* =========================================
+           PAGE HEADER
+           ========================================= */
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+
+        .page-header h1 {
+            margin: 0 0 8px;
+
+            color: #111827;
+
+            font-size: 32px;
+            font-weight: 800;
+        }
+
+
+        .page-header p {
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================================
+           FORM CARD
+           ========================================= */
+
+        .interview-card {
+            background: #ffffff;
+
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+
+            padding: 32px;
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.06);
+        }
+
+
+        /* =========================================
+           CARD HEADER
+           ========================================= */
+
+        .card-header {
+            margin-bottom: 28px;
+
+            padding-bottom: 18px;
+
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+
+        .card-header h2 {
+            margin: 0 0 6px;
+
+            color: #111827;
+
+            font-size: 21px;
+        }
+
+
+        .card-header p {
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================
+           FORM
+           ========================================= */
+
+        .interview-form {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 22px 24px;
+        }
+
+
+        .form-group {
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .form-group label {
+            margin-bottom: 8px;
+
+            color: #374151;
+
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+
+            width: 100%;
+
+            padding: 12px 13px;
+
+            box-sizing: border-box;
+
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+
+            background: #ffffff;
+
+            color: #111827;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+
+            outline: none;
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+
+            color: #9ca3af;
+        }
+
+
+        /* =========================================
+           FULL WIDTH FIELDS
+           ========================================= */
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+
+        /* =========================================
+           NOTES
+           ========================================= */
+
+        .form-group textarea {
+
+            min-height: 120px;
+
+            resize: vertical;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================================
+           SAVE BUTTON
+           ========================================= */
+
+        .form-actions {
+
+            grid-column: 1 / -1;
+
+            margin-top: 10px;
+
+            padding-top: 22px;
+
+            border-top: 1px solid #e5e7eb;
+        }
+
+
+        .save-button {
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 12px 22px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #2563eb;
+
+            color: #ffffff;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease;
+        }
+
+
+        .save-button:hover {
+
+            background: #1d4ed8;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================================
+           RESPONSIVE NAVBAR
+           ========================================= */
+
+        @media (max-width: 1200px) {
+
+            .app-nav {
+
+                padding: 0 3%;
+
+                gap: 20px;
+            }
+
+
+            .app-nav-links {
+
+                gap: 7px;
+            }
+
+
+            .app-nav-links a {
+
+                padding: 9px 10px;
+
+                font-size: 13px;
+            }
+        }
+
+
+        /* =========================================
+           TABLET
+           ========================================= */
+
+        @media (max-width: 900px) {
+
+            .app-nav {
+
+                min-height: auto;
+
+                padding: 15px 20px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+
+            .app-nav-links {
+
+                width: 100%;
+
+                justify-content: center;
+
+                flex-wrap: wrap;
+
+                gap: 8px;
+            }
+
+
+            .app-nav-links a {
+
+                padding: 8px 12px;
+
+                font-size: 13px;
+            }
+
+
+            .interview-page {
+
+                margin: 30px auto;
+            }
+
+
+            .interview-form {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .full-width {
+
+                grid-column: auto;
+            }
+
+
+            .form-actions {
+
+                grid-column: auto;
+            }
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 600px) {
+
+            .app-nav {
+
+                padding: 14px 15px;
+            }
+
+
+            .app-nav-links {
+
+                gap: 5px;
+            }
+
+
+            .app-nav-links a {
+
+                padding: 7px 9px;
+
+                font-size: 12px;
+            }
+
+
+            .interview-page {
+
+                margin: 25px auto;
+
+                padding: 0 15px;
+            }
+
+
+            .page-header h1 {
+
+                font-size: 27px;
+            }
+
+
+            .interview-card {
+
+                padding: 22px 18px;
+            }
+
+
+            .save-button {
+
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ======================================================
+     NAVIGATION
+======================================================= -->
+
+<nav class="app-nav">
+
+    <h2>
+        CareerTrack
+    </h2>
+
+
+    <div class="app-nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/jobs">
+            Jobs
+        </a>
+
+        <a href="/internships">
+            Internships
+        </a>
+
+        <a href="/assessments">
+            Assessments
+        </a>
+
+        <a href="/applications">
+            Applications
+        </a>
+
+        <a href="/interviews" class="active">
+            Interviews
+        </a>
+
+        <a href="/profile">
+            Profile
+        </a>
+
+        <a href="/logout" class="logout-link">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ======================================================
+     MAIN CONTENT
+======================================================= -->
+
+<main class="interview-page">
+
+
+    <!-- PAGE HEADER -->
+
+    <div class="page-header">
+
+        <h1>
+            Add Interview
+        </h1>
+
+        <p>
+            Schedule and manage your upcoming interview opportunities.
+        </p>
+
+    </div>
+
+
+    <!-- ==================================================
+         INTERVIEW FORM CARD
+    =================================================== -->
+
+    <div class="interview-card">
+
+
+        <div class="card-header">
+
+            <h2>
+                Interview Details
+            </h2>
+
+            <p>
+                Enter the interview information below to keep your career journey organized.
+            </p>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <form
+            class="interview-form"
+            method="POST"
+        >
+
+
+            <!-- COMPANY -->
+
+            <div class="form-group">
+
+                <label for="company">
+                    Company
+                </label>
+
+                <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    placeholder="Example: TCS"
+                    required
+                >
+
+            </div>
+
+
+            <!-- POSITION -->
+
+            <div class="form-group">
+
+                <label for="position">
+                    Position
+                </label>
+
+                <input
+                    type="text"
+                    id="position"
+                    name="position"
+                    placeholder="Example: Software Intern"
+                    required
+                >
+
+            </div>
+
+
+            <!-- INTERVIEW ROUND -->
+
+            <div class="form-group">
+
+                <label for="interview_round">
+                    Interview Round
+                </label>
+
+                <select
+                    id="interview_round"
+                    name="interview_round"
+                    required
+                >
+
+                    <option value="">
+                        Select Round
+                    </option>
+
+                    <option value="HR Round">
+                        HR Round
+                    </option>
+
+                    <option value="Technical Round">
+                        Technical Round
+                    </option>
+
+                    <option value="Coding Round">
+                        Coding Round
+                    </option>
+
+                    <option value="Managerial Round">
+                        Managerial Round
+                    </option>
+
+                    <option value="Final Round">
+                        Final Round
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div class="form-group">
+
+                <label for="status">
+                    Status
+                </label>
+
+                <select
+                    id="status"
+                    name="status"
+                    required
+                >
+
+                    <option value="Scheduled">
+                        Scheduled
+                    </option>
+
+                    <option value="Completed">
+                        Completed
+                    </option>
+
+                    <option value="Cancelled">
+                        Cancelled
+                    </option>
+
+                    <option value="Rescheduled">
+                        Rescheduled
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- INTERVIEW DATE -->
+
+            <div class="form-group">
+
+                <label for="interview_date">
+                    Interview Date
+                </label>
+
+                <input
+                    type="date"
+                    id="interview_date"
+                    name="interview_date"
+                    required
+                >
+
+            </div>
+
+
+            <!-- INTERVIEW TIME -->
+
+            <div class="form-group">
+
+                <label for="interview_time">
+                    Interview Time
+                </label>
+
+                <input
+                    type="time"
+                    id="interview_time"
+                    name="interview_time"
+                >
+
+            </div>
+
+
+            <!-- MODE -->
+
+            <div class="form-group">
+
+                <label for="mode">
+                    Mode
+                </label>
+
+                <select
+                    id="mode"
+                    name="mode"
+                >
+
+                    <option value="">
+                        Select Mode
+                    </option>
+
+                    <option value="Online">
+                        Online
+                    </option>
+
+                    <option value="Offline">
+                        Offline
+                    </option>
+
+                    <option value="Phone">
+                        Phone
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- MEETING LINK -->
+
+            <div class="form-group">
+
+                <label for="meeting_link">
+                    Meeting Link
+                </label>
+
+                <input
+                    type="url"
+                    id="meeting_link"
+                    name="meeting_link"
+                    placeholder="https://meet.google.com/..."
+                >
+
+            </div>
+
+
+            <!-- NOTES -->
+
+            <div class="form-group full-width">
+
+                <label for="notes">
+                    Notes
+                </label>
+
+                <textarea
+                    id="notes"
+                    name="notes"
+                    rows="5"
+                    placeholder="Example: Prepare DSA questions and review projects."
+                ></textarea>
+
+            </div>
+
+
+            <!-- SAVE -->
+
+            <div class="form-actions">
+
+                <button
+                    type="submit"
+                    class="save-button"
+                >
+                    ✓ Save Interview
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</main>
+
+
+</body>
+
+</html>

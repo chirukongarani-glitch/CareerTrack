@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Local database
+careertrack.db
+*.db
+
+# Uploaded resumes
+uploads/
+uploads/resumes/
+
+# Environment files
+.env
+.env.*
+
+# OAuth / Google credentials
+credentials.json
+client_secret*.json
+token*.json
+token.pickle
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

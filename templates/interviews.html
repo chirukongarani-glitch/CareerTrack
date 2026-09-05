@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Interviews - CareerTrack</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}">
+
+
+<style>
+
+    /* =========================================
+       PROFESSIONAL CAREERTRACK NAVBAR
+       ========================================= */
+
+    .app-nav {
+        width: 100%;
+
+        min-height: 72px;
+
+        padding: 0 5%;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 40px;
+
+        background: #ffffff;
+
+        border-bottom: 1px solid #e5e7eb;
+
+        box-sizing: border-box;
+    }
+
+
+    /* ================= LOGO ================= */
+
+    .app-nav h2 {
+
+        margin: 0;
+
+        flex-shrink: 0;
+
+        white-space: nowrap;
+
+        font-size: 25px;
+
+        font-weight: 800;
+
+        color: #111827;
+    }
+
+
+    /* ================= NAVIGATION LINKS ================= */
+
+    .app-nav-links {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: flex-end;
+
+        gap: 14px;
+
+        margin-left: auto;
+
+        flex-wrap: nowrap;
+    }
+
+
+    /* ================= EACH NAV LINK ================= */
+
+    .app-nav-links a {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        padding: 10px 13px;
+
+        margin: 0;
+
+        border-radius: 8px;
+
+        text-decoration: none;
+
+        white-space: nowrap;
+
+        color: #4b5563;
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        transition:
+            background 0.2s ease,
+            color 0.2s ease,
+            transform 0.2s ease;
+    }
+
+
+    /* ================= HOVER ================= */
+
+    .app-nav-links a:hover {
+
+        color: #2563eb;
+
+        background: #eff6ff;
+
+        transform: translateY(-1px);
+    }
+
+
+    /* ================= ACTIVE INTERVIEWS ================= */
+
+    .app-nav-links a.active {
+
+        color: #2563eb;
+
+        background: #eff6ff;
+    }
+
+
+    /* ================= LOGOUT ================= */
+
+    .app-nav-links a.logout-link {
+
+        color: #dc2626;
+    }
+
+
+    .app-nav-links a.logout-link:hover {
+
+        color: #b91c1c;
+
+        background: #fef2f2;
+    }
+
+
+    /* =========================================
+       PAGE CONTENT
+       ========================================= */
+
+    main {
+
+        max-width: 1200px;
+
+        margin: 45px auto;
+
+        padding: 0 25px;
+
+        box-sizing: border-box;
+    }
+
+
+    /* ================= PAGE HEADER ================= */
+
+    .page-header {
+
+        margin-bottom: 30px;
+    }
+
+
+    .page-header h1 {
+
+        margin-bottom: 8px;
+
+        font-size: 32px;
+
+        color: #111827;
+    }
+
+
+    .page-header p {
+
+        margin-bottom: 22px;
+
+        color: #6b7280;
+
+        font-size: 15px;
+    }
+
+
+    /* ================= ADD INTERVIEW BUTTON ================= */
+
+    .page-header > a {
+
+        display: inline-block;
+
+        padding: 11px 18px;
+
+        background: #2563eb;
+
+        color: white;
+
+        text-decoration: none;
+
+        border-radius: 8px;
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        transition: 0.2s ease;
+    }
+
+
+    .page-header > a:hover {
+
+        background: #1d4ed8;
+
+        transform: translateY(-1px);
+    }
+
+
+    /* =========================================
+       INTERVIEW CARD
+       ========================================= */
+
+    .dashboard-card {
+
+        background: #ffffff;
+
+        border: 1px solid #e5e7eb;
+
+        border-radius: 14px;
+
+        padding: 28px;
+
+        margin-bottom: 22px;
+
+        box-shadow:
+            0 4px 18px rgba(0, 0, 0, 0.06);
+
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+
+    .dashboard-card:hover {
+
+        transform: translateY(-2px);
+
+        box-shadow:
+            0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+
+    /* ================= CARD TITLE ================= */
+
+    .dashboard-card h2 {
+
+        margin-top: 0;
+
+        margin-bottom: 18px;
+
+        color: #111827;
+
+        font-size: 21px;
+    }
+
+
+    /* ================= CARD DETAILS ================= */
+
+    .dashboard-card p {
+
+        margin: 10px 0;
+
+        color: #4b5563;
+
+        font-size: 14px;
+
+        line-height: 1.6;
+    }
+
+
+    .dashboard-card p strong {
+
+        color: #374151;
+
+        font-weight: 700;
+    }
+
+
+    /* ================= MEETING LINK ================= */
+
+    .dashboard-card p a {
+
+        color: #2563eb;
+
+        font-weight: 600;
+
+        text-decoration: none;
+    }
+
+
+    .dashboard-card p a:hover {
+
+        text-decoration: underline;
+    }
+
+
+    /* ================= CARD ACTIONS ================= */
+
+    .dashboard-card > a {
+
+        display: inline-block;
+
+        padding: 8px 13px;
+
+        margin-top: 12px;
+
+        margin-right: 8px;
+
+        border-radius: 7px;
+
+        text-decoration: none;
+
+        font-size: 13px;
+
+        font-weight: 600;
+    }
+
+
+    /* EDIT */
+
+    .dashboard-card > a[href*="/edit-interview"] {
+
+        background: #f3f4f6;
+
+        color: #374151;
+    }
+
+
+    .dashboard-card > a[href*="/edit-interview"]:hover {
+
+        background: #e5e7eb;
+    }
+
+
+    /* DELETE */
+
+    .dashboard-card > a[href*="/delete-interview"] {
+
+        background: #fef2f2;
+
+        color: #dc2626;
+    }
+
+
+    .dashboard-card > a[href*="/delete-interview"]:hover {
+
+        background: #fee2e2;
+    }
+
+
+    /* =========================================
+       EMPTY STATE
+       ========================================= */
+
+    .dashboard-card h2:first-child {
+
+        color: #374151;
+    }
+
+
+    .dashboard-card > p {
+
+        color: #6b7280;
+    }
+
+
+    /* =========================================
+       TABLET
+       ========================================= */
+
+    @media (max-width: 1200px) {
+
+        .app-nav {
+
+            padding: 0 3%;
+
+            gap: 20px;
+        }
+
+
+        .app-nav-links {
+
+            gap: 7px;
+        }
+
+
+        .app-nav-links a {
+
+            padding: 9px 10px;
+
+            font-size: 13px;
+        }
+    }
+
+
+    /* =========================================
+       MOBILE
+       ========================================= */
+
+    @media (max-width: 900px) {
+
+        .app-nav {
+
+            min-height: auto;
+
+            padding: 15px 20px;
+
+            flex-direction: column;
+
+            gap: 15px;
+        }
+
+
+        .app-nav-links {
+
+            width: 100%;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+        }
+
+
+        .app-nav-links a {
+
+            padding: 8px 12px;
+
+            font-size: 13px;
+        }
+
+
+        main {
+
+            margin: 30px auto;
+
+            padding: 0 20px;
+        }
+    }
+
+
+    /* =========================================
+       SMALL MOBILE
+       ========================================= */
+
+    @media (max-width: 600px) {
+
+        .app-nav {
+
+            padding: 14px 15px;
+        }
+
+
+        .app-nav-links {
+
+            gap: 5px;
+        }
+
+
+        .app-nav-links a {
+
+            padding: 7px 9px;
+
+            font-size: 12px;
+        }
+
+
+        main {
+
+            margin: 25px auto;
+
+            padding: 0 15px;
+        }
+
+
+        .page-header h1 {
+
+            font-size: 26px;
+        }
+
+
+        .dashboard-card {
+
+            padding: 20px;
+        }
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+<!-- =========================================
+     NAVBAR
+     ========================================= -->
+
+<nav class="app-nav">
+
+```
+<h2>CareerTrack</h2>
+
+
+<div class="app-nav-links">
+
+    <a href="/">Home</a>
+
+    <a href="/dashboard">Dashboard</a>
+
+    <a href="/jobs">Jobs</a>
+
+    <a href="/internships">Internships</a>
+
+    <a href="/assessments">Assessments</a>
+
+    <a href="/applications">Applications</a>
+
+    <a href="/interviews" class="active">
+        Interviews
+    </a>
+
+    <a href="/profile">Profile</a>
+
+    <a href="/logout" class="logout-link">
+        Logout
+    </a>
+
+</div>
+```
+
+</nav>
+
+<!-- =========================================
+     MAIN CONTENT
+     ========================================= -->
+
+<main>
+
+```
+<!-- ================= PAGE HEADER ================= -->
+
+<div class="page-header">
+
+    <h1>Interviews</h1>
+
+    <p>
+        Track your upcoming and completed interviews.
+    </p>
+
+
+    <a href="/add-interview">
+        + Add Interview
+    </a>
+
+</div>
+
+
+<!-- =========================================
+     INTERVIEWS
+     ========================================= -->
+
+{% if interviews %}
+
+
+    {% for interview in interviews %}
+
+
+    <div class="dashboard-card">
+
+
+        <!-- COMPANY -->
+
+        <h2>
+            {{ interview["company"] }}
+        </h2>
+
+
+        <!-- POSITION -->
+
+        <p>
+
+            <strong>Position:</strong>
+
+            {{ interview["position"] }}
+
+        </p>
+
+
+        <!-- ROUND -->
+
+        <p>
+
+            <strong>Round:</strong>
+
+            {{ interview["interview_round"] }}
+
+        </p>
+
+
+        <!-- DATE -->
+
+        <p>
+
+            <strong>Date:</strong>
+
+            {{ interview["interview_date"] }}
+
+        </p>
+
+
+        <!-- TIME -->
+
+        <p>
+
+            <strong>Time:</strong>
+
+            {{ interview["interview_time"] }}
+
+        </p>
+
+
+        <!-- MODE -->
+
+        <p>
+
+            <strong>Mode:</strong>
+
+            {{ interview["mode"] }}
+
+        </p>
+
+
+        <!-- MEETING LINK -->
+
+        {% if interview["meeting_link"] %}
+
+        <p>
+
+            <strong>Meeting:</strong>
+
+            <a
+                href="{{ interview['meeting_link'] }}"
+                target="_blank"
+            >
+
+                Join Meeting
+
+            </a>
+
+        </p>
+
+        {% endif %}
+
+
+        <!-- STATUS -->
+
+        <p>
+
+            <strong>Status:</strong>
+
+            {{ interview["status"] }}
+
+        </p>
+
+
+        <!-- NOTES -->
+
+        {% if interview["notes"] %}
+
+        <p>
+
+            <strong>Notes:</strong>
+
+            {{ interview["notes"] }}
+
+        </p>
+
+        {% endif %}
+
+
+        <!-- ACTIONS -->
+
+        <a href="/edit-interview/{{ interview['id'] }}">
+
+            ✏️ Edit
+
+        </a>
+
+
+        <a
+            href="/delete-interview/{{ interview['id'] }}"
+            onclick="return confirm('Delete this interview?');"
+        >
+
+            🗑️ Delete
+
+        </a>
+
+
+    </div>
+
+
+    {% endfor %}
+
+
+{% else %}
+
+
+    <!-- =========================================
+         EMPTY STATE
+         ========================================= -->
+
+    <div class="dashboard-card">
+
+        <h2>
+            No Interviews Yet
+        </h2>
+
+        <p>
+            Add your first interview to start tracking it.
+        </p>
+
+        <a href="/add-interview">
+
+            + Add Interview
+
+        </a>
+
+    </div>
+
+
+{% endif %}
+```
+
+</main>
+
+</body>
+
+</html>
